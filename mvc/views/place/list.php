@@ -61,8 +61,8 @@
 		 	<?php foreach ($places as $place){?>
 		 		<tr>
 		 			<td class="centrado">
-		 				<img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>"
-		 					class="cover-mini" alt="Foto de <?= $place->name ?>">
+		 				<a href='/Place/show/<?=$place->id ?>'><img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>"
+		 					class="cover-mini" alt="Foto de <?= $place->name ?>"></a>
 		 			</td>		
 		 			<td><?= $place->name?></td>
 		 			<td><?= $place->type?></td>

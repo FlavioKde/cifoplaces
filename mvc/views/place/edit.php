@@ -36,27 +36,30 @@
 		 		enctype="multipart/form-data">
 		 	<!-- input oculto que contiene el ID del anuncio a actualizar -->
 		 	<input type="hidden" name="id" value="<?= $place->id ?>">
-		 	<label>Titulo:</label>
-		 	<input type="text" name="titulo" value="<?= $place->titulo ?>">
+		 	<label>Name:</label>
+		 	<input type="text" name="name" value="<?= $place->name ?>">
 		 	<br>
-		 	<label>Descripción:</label>
-		 	<input type="text" name="descripcion" value="<?= $place->descripcion ?>">
+		 	<label>Type:</label>
+		 	<input type="text" name="type" value="<?= $place->type ?>">
 		 	<br>
-		 	<label>Precio:</label>
-		 	<input type="text" name="precio" value="<?= $place->precio ?>">
+		 	<label>Location:</label>
+		 	<input type="text" name="location" value="<?= $place->location ?>">
 		 	<br>
-		 	<label>Foto</label>
-		 	<input type="file" name="foto" accept="image/*" id="file-with-preview">
+		 	<label>Description:</label>
+		 	<textarea name="description"><?= $place->description ?></textarea>
 		 	<br>
-		 	<input type="checkbox" name="eliminarfoto">
+		 	<label>Cover</label>
+		 	<input type="file" name="cover" accept="image/*" id="file-with-preview">
+		 	<br>
+		 	<input type="checkbox" name="eliminarcover">
 		 	<label>Eliminar foto</label>
 		 	<br>
 		 	<input type="submit" class="button" name="actualizar" value="Actualizar">		 
 		 </form>
 		 </section>
 		 <figure class= "flex1 centrado">
-		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->foto ?? DEFAULT_AD_IMAGE) ?>"
-		 		class="cover" id="preview-image" alt="Foto de <?= $place->titulo ?>">
+		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>"
+		 		class="cover" id="preview-image" alt="Foto de <?= $place->name ?>">
 		 		<figcaption>Foto de <?="$place->name" ?></figcaption>
 		 </figure>	 
 		 </div>

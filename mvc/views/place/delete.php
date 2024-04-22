@@ -25,8 +25,8 @@
 		 <h1><?= APP_NAME ?></h1>
 		 <h2>Borrar el place</h2>
 		 
-		 <form method="post" action="/Anuncio/destroy">
-		 	<p>Confirmar el borrado del anuncio <b><?=$place->titulo ?></b>.</p>
+		 <form method="post" action="/Place/destroy">
+		 	<p>Confirmar el borrado del anuncio <b><?=$place->name ?></b>.</p>
 		 	
 		 	<!-- input oculto que contiene el ID del anuncio a borrar -->
 		 	<input type="hidden" name="id" value="<?= $place->id ?>">

@@ -37,7 +37,7 @@ class PlaceController extends Controller{
         }
         //carga la vista
         $this->loadView('place/list', [
-            'Places'=> $places,
+            'places'=> $places,
             'paginator'=> $paginator, //pasamos el objeto Paginator a la vista
             'filtro'=>$filtro
             
@@ -85,15 +85,13 @@ class PlaceController extends Controller{
         $place = new Place();  //crea el nuevo anuncio
         
         $place->name                    =$this->request->post('name');
-        $place->type               =$this->request->post('type');
-        $place->location                    =$this->request->post('location');
-        $place->description              =$this->request->post('description');   
+        $place->type                    =$this->request->post('type');
+        $place->location                =$this->request->post('location');
+        $place->description             =$this->request->post('description');   
         //$place->cover                      =$this->request->post('cover');
         
         $place->iduser=Login::user()->id;
 
-     //con un try-catch local evitaremos ir directamente a la página de error
-     //cuando no se pueda gurdar el libro y no estemos en DEBUG
         try{
             $place->save();  //guarda el anuncio
             
@@ -103,18 +101,18 @@ class PlaceController extends Controller{
                     'cover', //nombre del input
                     '../public/'.AD_IMAGE_FOLDER, //ruta de la carpeta de destino
                     true,     //generar nombre único
-                    124000,   //tamaño máximo
+                    1240000,   //tamaño máximo
                     'image/*', //tipo mime
                     'ad_'    //prefijo del nombre
                  );
-                $place->update(); //añade la foto del anuncio
+                $place->update(); //añade la foto 
             }
             
             //flashea un mensaje en sesión (para que no se borre al redireccionar)
             Session::success("Guardado del place $place->name correcto.");
             redirect("/Place/show/$place->id");  //redirecciona a los detalles
         }catch (SQLException $e){
-            Session::error("No se puede guardar el anuncio $place->name");
+            Session::error("No se puede guardar el lugar $place->name");
             
             //si estamos en modo DEBUG, si que iremos a la pagina de error
             if(DEBUG)
@@ -174,8 +172,8 @@ class PlaceController extends Controller{
                 if (!$place) // si no hay anuncio con ese id
                     throw new NotFoundException("No se ha encontrado el anuncio $id.");
                 //recuperar el resto de campos
-                $place->name                    =$this->request->post('name');
-                $place->type               =$this->request->post('type');
+                $place->name                        =$this->request->post('name');
+                $place->type                        =$this->request->post('type');
                 $place->location                    =$this->request->post('location');
                 $place->description                 =$this->request->post('description');
                 
@@ -186,7 +184,7 @@ class PlaceController extends Controller{
                     //de esta forma nos aseguraremos que se ha actualizado el anuncio
                     //independientemente de si pudo procesar el fichero o no
                     $secondUpdate = false; //flag para saber si hay que actualizar de nuevo
-                    $oldCover = $place->foto;  //portada antigua
+                    $oldCover = $place->cover;  //portada antigua
                     
                     if (Upload::arrive('cover')){ //si llega una nueva foto
                         $place->cover = Upload::save(
@@ -195,7 +193,7 @@ class PlaceController extends Controller{
                         $secondUpdate = true;
                     }
                     //si hay que eliminar portada, el libro tenía una anterior y no llega una nueva...
-                    if (isset($_POST['eliminarfoto']) && $oldCover && !Upload::arrive('cover')){
+                    if (isset($_POST['eliminarcover']) && $oldCover && !Upload::arrive('cover')){
                         $place->cover = NULL;
                         $secondUpdate = true;
                     }

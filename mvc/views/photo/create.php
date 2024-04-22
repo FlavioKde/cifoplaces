@@ -38,17 +38,18 @@
 		 
 		 <form method="post" action="/Photo/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
+		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
 		 	<label>Name</label>
 		 	<input type="text" name="name" value="<?= old('name') ?>">
-		 	<br>
-		 	<label>Type</label>
-		 	<input type="text" name="type" value="<?= old('type') ?>">
 		 	<br>
 		 	<label>Description</label>
 		 	<input type="text" name="description" value="<?= old('description') ?>">
 		 	<br>
-		 	<label>Location</label>
-		 	<input type="text" name="location" value="<?= old('location') ?>">
+		 	<label>Date</label>
+		 	<input type="date" name="date" value="<?= old('date') ?>">
+		 	<br>
+		 	<label>Time</label>
+		 	<input type="time" name="time" value="<?= old('time') ?>">
 		 	<br>
 		 	<label>Photo</label>
 		 	<input type="file" name="cover" accept="image/*" id="file-with-preview">
@@ -65,7 +66,7 @@
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de place</a>		 	
+		 	<a class="button" href="/Photo/list">Lista de photo</a>		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

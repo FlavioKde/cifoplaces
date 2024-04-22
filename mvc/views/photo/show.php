@@ -3,10 +3,10 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>Detalles de los places - <?= APP_NAME?></title>
+		<title>Detalles de los photo - <?= APP_NAME?></title>
 		<!-- META -->
 		<meta name="viewport" content="width=device-widh, initial-scale=1.0">
-		<meta name="description" content="Detalles de los anuncios en  <?= APP_NAME ?> ">
+		<meta name="description" content="Detalles de los photo en  <?= APP_NAME ?> ">
 		<meta name="author" content="Robert Sallent">
 		
 		<!-- FAVICON -->
@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Detalles de los places') ?>
+		 <?=(TEMPLATE)::getHeader('Detalles de los photo') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
@@ -25,25 +25,25 @@
 		 <div class="flex-container">
 		 
 		 <section class="flex1">
-		 <h2><?= "Detalles de los places $place->name" ?></h2>
+		 <h2><?= "Detalles de los places $photo->name" ?></h2>
 		 
-		 <p><b>Nombre:</b>                   <?=$place->name?></p>
-		 <p><b>Descripción:</b>              <?=$place->descripcion?></p>
-		 <p><b>Precio:</b>				     <?=$place->precio?></p>
-		 <p><b>Foto:</b>                   	 <?=$place->foto ?></p>
+		 <p><b>Nombre:</b>                   <?=$photo->name?></p>
+		 <p><b>Descripción:</b>              <?=$photo->descripcion?></p>
+		 <p><b>Dia:</b>				    	 <?=$photo->date?></p>
+		 <p><b>Hora:</b>                   	 <?=$photo->time ?></p>
 		 
 		 </section>
 		 <figure class= "flex1 centrado">
-		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->foto ?? DEFAULT_AD_IMAGE) ?>"
-		 		class="cover" alt="Foto de <?= $place->name ?>">
-		 		<figcaption>Foto de <?="$place->name, a un precio de $place->precio € " ?></figcaption>
+		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($photo->foto ?? DEFAULT_AD_IMAGE) ?>"
+		 		class="cover" alt="Foto de <?= $photo->name ?>">
+		 		<figcaption>Foto de <?="$photo->name" ?></figcaption>
 		 </figure>
 		 </div>			 
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de places</a>
-		 	<a class="button" href="/Place/edit/<?= $place->id ?>">Edición</a>
-		 	<a class="button" href="/Place/delete<?= $place->id ?>">Borrado</a>
+		 	<a class="button" href="/Photo/list">Lista de places</a>
+		 	<a class="button" href="/Photo/edit/<?= $place->id ?>">Edición</a>
+		 	<a class="button" href="/Photo/delete<?= $place->id ?>">Borrado</a>
 		 </div>
 	
 		

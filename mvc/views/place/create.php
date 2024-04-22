@@ -47,9 +47,8 @@
 		 	<label>Location</label>
 		 	<input type="text" name="location" value="<?= old('location') ?>">
 		 	<br>
-		 	<!--  poner un text area-->
 		 	<label>Description</label>
-		 	<input type="text" name="location" value="<?= old('description') ?>">
+		 	<textarea name="description"><?= old('description') ?></textarea>
 		 	<br>
 		 	<label>Cover</label>
 		 	<input type="file" name="cover" accept="image/*" id="file-with-preview">

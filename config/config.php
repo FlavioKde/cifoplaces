@@ -66,7 +66,7 @@ define('AD_IMAGE_FOLDER', '/images/ad');
 define('USER_IMAGE_FOLDER', '/images/user');
 
 //imagen por defecto para places
-define('DEFAULT_AD_IMAGE', 'trato.jpg');
+define('DEFAULT_AD_IMAGE', 'defecto.png');
 
 //imagen por defecto para user
 define('DEFAULT_USER_IMAGE', 'usuario.jpg');

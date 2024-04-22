@@ -10,7 +10,7 @@
 		<meta name="author" content="Robert Sallent">
 		
 		<!-- FAVICON -->
-		<link rel="shortcut icon" href="/favicon.ico" tyoe="image/png"> 
+		<link rel="shortcut icon" href="/favicon.ico" type="image/png"> 
 		
 		<!-- CSS -->
 		<?= (TEMPLATE)::getCss() ?>	
@@ -27,14 +27,17 @@
 		 <section class="flex1">
 		 <h2><?= "Detalles de los places $place->name" ?></h2>
 		 
-		 <div class="centrado">
+		 <div class="derecha">
 		 	<a class="button" href="/Photo/create<?= $photo->id ?>">New Photo</a>
 		 </div>
+		 <form method="post">
+		 <input type="hidden" name="idplace" value="$place->id">
+		 </form>
 		 
 		 <p><b>Nombre:</b>                   <?=$place->name?></p>
-		 <p><b>Type:</b>              <?=$place->type?></p>
-		 <p><b>location:</b>				     <?=$place->location?></p>
-		 <p><b>decription:</b>                   	 <?=$place->description ?></p>
+		 <p><b>Type:</b>                     <?=$place->type?></p>
+		 <p><b>location:</b>				 <?=$place->location?></p>
+		 <p><b>decription:</b>               <?=$place->description ?></p>
 		 
 		 </section>
 		 <figure class= "flex1 centrado">
