@@ -47,6 +47,7 @@
 		 	<label>Location</label>
 		 	<input type="text" name="location" value="<?= old('location') ?>">
 		 	<br>
+		 	<!--  poner un text area-->
 		 	<label>Description</label>
 		 	<input type="text" name="location" value="<?= old('description') ?>">
 		 	<br>

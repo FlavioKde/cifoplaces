@@ -32,13 +32,13 @@
 		 </div>
 		 
 		 <p><b>Nombre:</b>                   <?=$place->name?></p>
-		 <p><b>Descripción:</b>              <?=$place->descripcion?></p>
-		 <p><b>Precio:</b>				     <?=$place->precio?></p>
-		 <p><b>Foto:</b>                   	 <?=$place->foto ?></p>
+		 <p><b>Type:</b>              <?=$place->type?></p>
+		 <p><b>location:</b>				     <?=$place->location?></p>
+		 <p><b>decription:</b>                   	 <?=$place->description ?></p>
 		 
 		 </section>
 		 <figure class= "flex1 centrado">
-		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->foto ?? DEFAULT_AD_IMAGE) ?>"
+		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>"
 		 		class="cover" alt="Foto de <?= $place->name ?>">
 		 		<figcaption>Foto de <?="$place->name, a un precio de $place->precio € " ?></figcaption>
 		 </figure>
