@@ -27,7 +27,7 @@ class PlaceController extends Controller{
         
         //recupera los resultados para la página actual(el offset lo calcula el paginator)
         $places = Place::filter($filtro, $limit, $paginator->getOffset());
-        //si no hay anuncio
+        //si no hay lugar
         }else{
             $total=Place::total();
             //crea el objeto paginator
@@ -46,20 +46,22 @@ class PlaceController extends Controller{
         
     }
     
-    //método que muestra los detalles de un anuncio
+    //método que muestra los detalles de un lugar
     public function show(int $id = 0){
         
         $place = Place::findOrFail($id, "No se encontro el lugar solicitado.");
         
+        $photos = $place->hasMany('Photo');
     
         
          //carga la vista y le pasa el libro
          $this->loadView('place/show', [
              'place'=> $place,   
+             'photos'=> $photos,
          ]);
     }
     
-    //método que muestra el formulario del nuevo anuncio
+    //método que muestra el formulario del nuevo lugar
     public function create(){
       
        

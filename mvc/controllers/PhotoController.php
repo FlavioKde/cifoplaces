@@ -9,37 +9,37 @@ class PhotoController extends Controller{
     }
     
     //operación para listar los anuncios
-    public function list(int $page = 1){
+   // public function list(int $page = 1){
+    public function list( $idplace){
         
-        
-        
+        $photos = Photo::where('idplace', $idPlace)->get();
         //comprobar si hay filtros
-        $filtro = Filter::apply('photos');
+     //   $filtro = Filter::apply('photos');
         
         //datos para paginación
-        $limit = RESULTS_PER_PAGE;  //resultados por paginas
-        if ($filtro){
+      //  $limit = RESULTS_PER_PAGE;  //resultados por paginas
+       // if ($filtro){
             //recupera el total de los anuncios con los filtros aplicados
-            $total = Photo::filteredResults($filtro);    //total de resultados
+         //   $total = Photo::filteredResults($filtro);    //total de resultados
             
             //crea un objeto paginator
-            $paginator = new Paginator('/Photo/list', $page, $limit, $total, 'en');
+          //  $paginator = new Paginator('/Photo/list', $page, $limit, $total, 'en');
             
             //recupera los resultados para la página actual(el offset lo calcula el paginator)
-            $photos = Photo::filter($filtro, $limit, $paginator->getOffset());
+         //   $photos = Photo::filter($filtro, $limit, $paginator->getOffset());
             //si no hay anuncio
-        }else{
-            $total=Photo::total();
+       // }else{
+         //   $total=Photo::total();
             //crea el objeto paginator
-            $paginator=new Paginator('/Place/list', $page, $limit, $total);
+           // $paginator=new Paginator('/Photo/list', $page, $limit, $total);
             //recupera todos los anuncio
-            $photos = Place::orderBy('name', 'ASC', $limit, $paginator->getOffset());
-        }
+        //    $photos = Place::orderBy('name', 'ASC', $limit, $paginator->getOffset());
+       // }
         //carga la vista
-        $this->loadView('photo/list', [
+        $this->loadView('place/show', [
             'photos'=> $photos,
-            'paginator'=> $paginator, //pasamos el objeto Paginator a la vista
-            'filtro'=>$filtro
+           // 'paginator'=> $paginator, //pasamos el objeto Paginator a la vista
+           // 'filtro'=>$filtro
             
         ]);
         
@@ -50,19 +50,19 @@ class PhotoController extends Controller{
     public function show(int $id = 0){
         
         $photo = Photo::findOrFail($id, "No se encontro el lugar solicitado.");
-        $places = Place::hasMany('Place');
+       
         
         
         
         //carga la vista y le pasa el libro
         $this->loadView('photo/show', [
             'photo'=> $photo,
-            'places'=> $places,
+         
         ]);
     }
     
     //método que muestra el formulario del nuevo anuncio
-    public function create(){
+    public function create(int $idplace = 0){
         
        
         
@@ -71,23 +71,27 @@ class PhotoController extends Controller{
             redirect('/');
         }
         
-       $places = Place::hasMany('place');
+      
         
         $this->loadView('photo/create', [
-            'places'=> $places,
+            'place'=> Place::findOrFail($idplace)
+        
             
         ]);
     }
     
     
     //guardar el anuncio
-    public function store(){
+    public function store(int $id = 0){
         
         Auth::oneRole(['ROLE_USER', 'ROLE_ADMIN']);
         //comprueba que la petición venga del formulario
         if (!$this->request->has('guardar'))
             throw new Exception('No se recibio el formulario');
+            
+            
             $photo = new Photo();  //crea el nuevo anuncio
+            
             
             $photo->name                     =$this->request->post('name');
             $photo->date                     =$this->request->post('date');
@@ -96,12 +100,12 @@ class PhotoController extends Controller{
             $photo->created_at               =$this->request->post('created_at');
             $photo->updated_at               =$this->request->post('updated_at');
             
-            //$place->cover                      =$this->request->post('cover');
+          
             
             $photo->iduser=Login::user()->id;
             
-            
             $photo->idplace = $this->request->post('idplace');
+            
             
             
             //con un try-catch local evitaremos ir directamente a la página de error
@@ -110,21 +114,21 @@ class PhotoController extends Controller{
                 $photo->save();  //guarda el anuncio
                 
                 
-                if(Upload::arrive('cover')){//si llega el fichero de la portada...
-                    $photo->cover = Upload::save(
-                        'cover', //nombre del input
-                        '../public/'.AD_IMAGE_FOLDER, //ruta de la carpeta de destino
+                if(Upload::arrive('file')){//si llega el fichero de la portada...
+                    $photo->file = Upload::save(
+                        'file', //nombre del input
+                        '../public/'.PI_IMAGE_FOLDER, //ruta de la carpeta de destino
                         true,     //generar nombre único
                         1240000,   //tamaño máximo
                         'image/*', //tipo mime
-                        'ad_'    //prefijo del nombre
+                        'pi_'    //prefijo del nombre
                         );
                     $photo->update(); //añade la foto del anuncio
                 }
                 
                 //flashea un mensaje en sesión (para que no se borre al redireccionar)
-                Session::success("Guardado del place $photo->name correcto.");
-                redirect("/Photo/show/$photo->id");  //redirecciona a los detalles
+                Session::success("Guardado de foto $photo->name correcto.");
+                redirect("/Place/show/$photo->idplace");  //redirecciona a los detalles
             }catch (SQLException $e){
                 Session::error("No se puede guardar el anuncio $photo->name");
                 

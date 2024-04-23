@@ -3,7 +3,7 @@
 
 //Class Anuncio forma parte del modelo
 //hereda los métodos básicos del CRUD de model
-class Comments extends Model{
+class Comment extends Model{
     //PROPIEDADES
     //no indico las propiedades
     

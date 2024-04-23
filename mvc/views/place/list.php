@@ -10,6 +10,16 @@
 		<meta name="description" content="Lista de anuncios en <?= APP_NAME ?>">
 		<meta name="author" content="Robert Sallent">
 		
+		<script>
+		
+		//revisar no esta del todo correcto
+			function confirmar(id){
+				if(confirm('Seguro que queres borrar el lugar?'))
+					location.href = '/Place/list/
+		
+		
+		</script>
+		
 		<!-- FAVICON -->
 		<link rel="shortcut icon" href="/favicon.ico" type="image/png">
 		
@@ -58,7 +68,7 @@
 		 	<tr>
 		 		<th>Cover</th><th>Name</th><th>Type</th><th>Location</th><th>Description</th><th>Operaciones</th>
 		 	</tr>
-		 	<?php foreach ($places as $place){?>
+		 	<?php foreach ($places as $place) {?>
 		 		<tr>
 		 			<td class="centrado">
 		 				<a href='/Place/show/<?=$place->id ?>'><img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>"
@@ -69,9 +79,15 @@
 		 			<td><?= $place->location?></td>
 		 			<td><?= $place->description?></td>
 		 			<td>
-		 				<a href='/Place/show/<?=$place->id ?>'>Ver</a> -
-		 				<a href='/Place/edit/<?=$place->id ?>'>Actualizar</a> -
-		 				<a href='/Place/delete/<?=$place->id ?>'>Borrar</a> -		
+		 			
+		 			
+		 				<a class="button" href='/Place/show/<?=$place->id ?>'>Ver</a> -
+		 				<?php if(Login::user()->id == $place->iduser) {?>
+		 				<a class="button" href='/Place/edit/<?=$place->id ?>'>Actualizar</a> -
+		 				<?php }?>
+		 				<?php if(Login::user()->id == $place->iduser) {?>
+		 				<a class="button" href='/Place/delete/<?=$place->id ?>'>Borrar</a> 	
+		 				<?php }?>	
 		 			</td>
 		 		</tr>
 		 		<?php }?>		

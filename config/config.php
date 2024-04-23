@@ -62,8 +62,14 @@ define('TEMPLATE', 'Template');
 //Carpeta para las fotos places
 define('AD_IMAGE_FOLDER', '/images/ad');
 
+//Carpeta para las fotos que se añaden a la de portada
+define('PI_IMAGE_FOLDER', 'images/pi');
+
 //Carpeta para user
 define('USER_IMAGE_FOLDER', '/images/user');
+
+//imagen por defecto para imagenes añadidas
+define('DEFAULT_PICTURE_IMAGE', 'picture.jpg');
 
 //imagen por defecto para places
 define('DEFAULT_AD_IMAGE', 'defecto.png');

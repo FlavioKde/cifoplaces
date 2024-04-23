@@ -3,7 +3,7 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>Lista de photo - <?= APP_NAME?></title>
+		<title>Create de photo - <?= APP_NAME?></title>
 		
 		<!-- META -->
 		<meta name="viewport" content="width=device-widh, initial-scale=1.0">
@@ -38,7 +38,7 @@
 		 
 		 <form method="post" action="/Photo/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
-		 	<!--  <input type="hidden" name="idplace" value="<?= $place->id ?>"> -->
+		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
 		 	
 		 	<label>Name</label>
 		 	<input type="text" name="name" value="<?= old('name') ?>">
@@ -53,14 +53,15 @@
 		 	<input type="time" name="time" value="<?= old('time') ?>">
 		 	<br>
 		 	<label>Photo</label>
-		 	<input type="file" name="cover" accept="image/*" id="file-with-preview">
+		 	<input type="file" name="file" accept="image/*" id="file-with-preview">
 		 	<br>
 		 	<input type="submit" class="button" name="guardar" value="Guardar">		 
 		 </form>
 		 </section>
 		 <figure class= "flex1 centrado">
-		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($photo->cover ?? DEFAULT_AD_IMAGE) ?>" id="preview-image"
+		 	<img src="<?= PI_IMAGE_FOLDER.'/'.($photo->file ?? DEFAULT_PICTURE_IMAGE) ?>" id="preview-image"
 		 		class="cover" alt="Foto de <?= $photo->name ?>">
+		 		<?php var_dump($photo)?>
 		 	<figcaption>Previsualización de la imagen</figcaption>	
 		 </figure>	
 		 </div> 
