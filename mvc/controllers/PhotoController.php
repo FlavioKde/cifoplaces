@@ -50,26 +50,31 @@ class PhotoController extends Controller{
     public function show(int $id = 0){
         
         $photo = Photo::findOrFail($id, "No se encontro el lugar solicitado.");
+        $places = Place::hasMany('Place');
         
         
         
         //carga la vista y le pasa el libro
         $this->loadView('photo/show', [
             'photo'=> $photo,
+            'places'=> $places,
         ]);
     }
     
     //método que muestra el formulario del nuevo anuncio
     public function create(){
         
+       
         
         if (!Login::oneRole(['ROLE_USER'])){
             Session::error("No tienes los permisos necesarios para hacer esto.");
             redirect('/');
         }
         
+       $places = Place::hasMany('place');
+        
         $this->loadView('photo/create', [
-            
+            'places'=> $places,
             
         ]);
     }
@@ -97,7 +102,7 @@ class PhotoController extends Controller{
             
             
             $photo->idplace = $this->request->post('idplace');
-            //$photo->idplace=Place::id()->id;
+            
             
             //con un try-catch local evitaremos ir directamente a la página de error
             //cuando no se pueda gurdar el libro y no estemos en DEBUG
@@ -110,7 +115,7 @@ class PhotoController extends Controller{
                         'cover', //nombre del input
                         '../public/'.AD_IMAGE_FOLDER, //ruta de la carpeta de destino
                         true,     //generar nombre único
-                        124000,   //tamaño máximo
+                        1240000,   //tamaño máximo
                         'image/*', //tipo mime
                         'ad_'    //prefijo del nombre
                         );

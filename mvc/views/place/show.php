@@ -28,7 +28,7 @@
 		 <h2><?= "Detalles de los places $place->name" ?></h2>
 		 
 		 <div class="derecha">
-		 	<a class="button" href="/Photo/create<?= $photo->id ?>">New Photo</a>
+		 	<a class="button" href="/Photo/create/<?= $place->id ?>">New Photo</a>
 		 </div>
 		 <form method="post">
 		 <input type="hidden" name="idplace" value="$place->id">

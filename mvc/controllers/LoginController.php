@@ -44,7 +44,7 @@ class LoginController extends Controller{
             if(DB_LOGIN_ERRORS)
                 AppError::new('Login', "Intento de identificación incorrecto para $user.");
                 
-            redirect('/User/home');
+            redirect('/Login');
         }
         
         Login::set($identificado); // vincula el usuario a la sesión
@@ -56,7 +56,7 @@ class LoginController extends Controller{
         
         
         // redirección tras Login
-        redirect($pending ?? REDIRECT_AFTER_LOGIN ?? '/User/home');
+        redirect($pending ?? REDIRECT_AFTER_LOGIN ?? '/');
     }
 }
 

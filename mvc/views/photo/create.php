@@ -38,7 +38,8 @@
 		 
 		 <form method="post" action="/Photo/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
-		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
+		 	<!--  <input type="hidden" name="idplace" value="<?= $place->id ?>"> -->
+		 	
 		 	<label>Name</label>
 		 	<input type="text" name="name" value="<?= old('name') ?>">
 		 	<br>
