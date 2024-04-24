@@ -3,11 +3,11 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>create place  - <?= APP_NAME?></title>
+		<title>Crear nuevo lugar  - <?= APP_NAME?></title>
 		
 		<!-- META -->
 		<meta name="viewport" content="width=device-widh, initial-scale=1.0">
-		<meta name="description" content="Creación de anuncio en <?= APP_NAME ?>">
+		<meta name="description" content="Creación de un nuevo lugar en <?= APP_NAME ?>">
 		<meta name="author" content="Robert Sallent">
 		
 		<!-- FAVICON -->
@@ -20,7 +20,7 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Creación de anuncios') ?>
+		 <?=(TEMPLATE)::getHeader('Creación de un nuevo lugar') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getBreadCrumbs([
 		     "Place"=>'/Place/list',
@@ -34,23 +34,23 @@
 		 <section class="flex1">
 		 
 		 
-		 <h2>create pleace</h2>
+		 <h2>Creación de nuevo lugar</h2>
 		 
 		 <form method="post" action="/Place/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
-		 	<label>Name</label>
+		 	<label>Nombre</label>
 		 	<input type="text" name="name" value="<?= old('name') ?>">
 		 	<br>
-		 	<label>Type</label>
+		 	<label>Tipo</label>
 		 	<input type="text" name="type" value="<?= old('type') ?>">
 		 	<br>
-		 	<label>Location</label>
+		 	<label>Lugar</label>
 		 	<input type="text" name="location" value="<?= old('location') ?>">
 		 	<br>
-		 	<label>Description</label>
+		 	<label>Descripción</label>
 		 	<textarea name="description"><?= old('description') ?></textarea>
 		 	<br>
-		 	<label>Cover</label>
+		 	<label>Foto</label>
 		 	<input type="file" name="cover" accept="image/*" id="file-with-preview">
 		 	<br>
 		 	<input type="submit" class="button" name="guardar" value="Guardar">		 
@@ -65,7 +65,7 @@
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de Anuncios</a>		 	
+		 	<a class="button" href="/Place/list">Lista de lugares</a>		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

@@ -8,10 +8,10 @@ class CommentController extends Controller{
         $this->list(); //redirige al método $list
     }
     
-    public function list( $idplace){
+    public function list( $idplace,){
         
-        $comments = Comment::where('idplace', $idPlace)->get();
-        
+        $comments = Comment::where('idplace', $idplace)->get();
+       // $comments = Comment::where('idphoto', $idphoto)->get();
         
         //carga la vista
         $this->loadView('place/show', [
@@ -28,18 +28,21 @@ class CommentController extends Controller{
         
         $comment = Comment::findOrFail($id, "No se encontro el comentario solicitado.");
         
-        //$photos = $place->hasMany('Photo');
+        //$photos = $comment->hasMany('Photo');
+        
+        //$places = $comment->hasMany('Place');
     
         
          //carga la vista y le pasa el libro
          $this->loadView('place/show', [
              'comment'=> $comment,   
-          //   'photos'=> $photos,
+            // 'photos'=> $photos,
+            // 'places'=> $places,
          ]);
     }
     
     //método que muestra el formulario del nuevo lugar
-    public function create(){
+    public function create($idplace , $idphoto){
       
        
         if (!Login::oneRole(['ROLE_USER'])){
@@ -63,11 +66,15 @@ class CommentController extends Controller{
         if (!$this->request->has('guardar'))
             throw new Exception('No se recibio el formulario');
         $comment = new Comment();  //crea el nuevo anuncio
-        
+        $comment->idplace                 =$this->request->post('idplace');
+        $comment->idphoto                 =$this->request->post('idphoto');
         $comment->text                    =$this->request->post('text');
         $comment->created_at              =$this->request->post('created_at');
        
-        $comment->iduser=Login::user()->id;
+        $comment->iduser                  =Login::user()->id;
+        
+        
+        
 
         try{
             $comment->save();  //guarda el anuncio
@@ -86,7 +93,7 @@ class CommentController extends Controller{
         //}
             
             //flashea un mensaje en sesión (para que no se borre al redireccionar)
-            Session::success("Guardado del comentario $comment->name correcto.");
+            Session::success("Guardado del comentario correcto.");
             redirect("/Place/show/$comment->idplace");  //redirecciona a los detalles
         }catch (SQLException $e){
             Session::error("No se puede guardar el comentario");

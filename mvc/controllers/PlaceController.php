@@ -52,14 +52,14 @@ class PlaceController extends Controller{
         $place = Place::findOrFail($id, "No se encontro el lugar solicitado.");
         
         $photos = $place->hasMany('Photo');
-        $comments = $comment->hasMany('Comment');
+        $comments = $place->hasMany('Comment');
     
         
          //carga la vista y le pasa el libro
          $this->loadView('place/show', [
              'place'=> $place,   
              'photos'=> $photos,
-             'comment'=> $comments,
+             'comments'=> $comments,
          ]);
     }
     
@@ -92,7 +92,7 @@ class PlaceController extends Controller{
         $place->type                    =$this->request->post('type');
         $place->location                =$this->request->post('location');
         $place->description             =$this->request->post('description');   
-        //$place->cover                      =$this->request->post('cover');
+       
         
         $place->iduser=Login::user()->id;
 

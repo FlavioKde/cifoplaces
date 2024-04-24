@@ -66,7 +66,7 @@
 		 </div>
 		 <table>
 		 	<tr>
-		 		<th>Cover</th><th>Name</th><th>Type</th><th>Location</th><th>Description</th><th>Operaciones</th>
+		 		<th>Foto</th><th>Nombre</th><th>Tipo</th><th>Lugar</th><th>Descripción</th><th>Operaciones</th>
 		 	</tr>
 		 	<?php foreach ($places as $place) {?>
 		 		<tr>

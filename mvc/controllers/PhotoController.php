@@ -9,8 +9,8 @@ class PhotoController extends Controller{
     }
     
     //operación para listar los anuncios
-   // public function list(int $page = 1){
-    public function list( $idplace){
+    public function list(int $page = 1){
+   // public function list( $idplace){
         
         $photos = Photo::where('idplace', $idPlace)->get();
         //comprobar si hay filtros

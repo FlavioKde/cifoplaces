@@ -28,22 +28,26 @@
 		 <h2><?= "Detalles de los places $photo->name" ?></h2>
 		 
 		 <p><b>Nombre:</b>                   <?=$photo->name?></p>
-		 <p><b>Descripción:</b>              <?=$photo->descripcion?></p>
+		 <p><b>Descripción:</b>              <?=$photo->description?></p>
 		 <p><b>Dia:</b>				    	 <?=$photo->date?></p>
 		 <p><b>Hora:</b>                   	 <?=$photo->time ?></p>
 		 
 		 </section>
 		 <figure class= "flex1 centrado">
-		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($photo->foto ?? DEFAULT_AD_IMAGE) ?>"
+		 	<img src="<?= PI_IMAGE_FOLDER.'/'.($photo->file ?? DEFAULT_PI_IMAGE) ?>"
 		 		class="cover" alt="Foto de <?= $photo->name ?>">
 		 		<figcaption>Foto de <?="$photo->name" ?></figcaption>
 		 </figure>
 		 </div>			 
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Lista de places</a>
-		 	<a class="button" href="/Photo/edit/<?= $place->id ?>">Edición</a>
-		 	<a class="button" href="/Photo/delete<?= $place->id ?>">Borrado</a>
+		 	<a class="button" href="/Photo/list">Lista de fotos</a>
+		 	<?php if (Login::user()->id == $photo->id){?>
+		 	<a class="button" href="/Photo/edit/<?= $photo->id ?>">Edición</a>
+		 	<?php }?>
+		 	<?php if (Login::user()->id == $photo->id) {?>
+		 	<a class="button" href="/Photo/delete<?= $photo->id ?>">Borrado</a>
+		 	<?php }?>
 		 </div>
 	
 		
