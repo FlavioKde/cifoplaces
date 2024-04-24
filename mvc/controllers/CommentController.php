@@ -1,65 +1,40 @@
 <?php
 //controlador para las operaciones con libros
 //cada método implementará una operación o un paso de la misma
-class PlaceController extends Controller{
+class CommentController extends Controller{
     
     //operación por defecto
     public function index(){
         $this->list(); //redirige al método $list
     }
     
-    //operación para listar los anuncios
-    public function list(int $page = 1){
-       
+    public function list( $idplace){
+        
+        $comments = Comment::where('idplace', $idPlace)->get();
         
         
-        //comprobar si hay filtros
-        $filtro = Filter::apply('places');
-        
-        //datos para paginación
-        $limit = RESULTS_PER_PAGE;  //resultados por paginas
-        if ($filtro){
-            //recupera el total de los anuncios con los filtros aplicados
-        $total = Place::filteredResults($filtro);    //total de resultados
-        
-        //crea un objeto paginator
-        $paginator = new Paginator('/Place/list', $page, $limit, $total, 'en');
-        
-        //recupera los resultados para la página actual(el offset lo calcula el paginator)
-        $places = Place::filter($filtro, $limit, $paginator->getOffset());
-        //si no hay lugar
-        }else{
-            $total=Place::total();
-            //crea el objeto paginator
-            $paginator=new Paginator('/Place/list', $page, $limit, $total);
-            //recupera todos los anuncio
-            $places = Place::orderBy('name', 'ASC', $limit, $paginator->getOffset());
-        }
         //carga la vista
-        $this->loadView('place/list', [
-            'places'=> $places,
-            'paginator'=> $paginator, //pasamos el objeto Paginator a la vista
-            'filtro'=>$filtro
+        $this->loadView('place/show', [
+            'comments'=> $comments,
+            
             
         ]);
         
         
     }
     
-    //método que muestra los detalles de un lugar
+    //método que muestra los detalles de un comentario
     public function show(int $id = 0){
         
-        $place = Place::findOrFail($id, "No se encontro el lugar solicitado.");
+        $comment = Comment::findOrFail($id, "No se encontro el comentario solicitado.");
         
-        $photos = $place->hasMany('Photo');
-        $comments = $comment->hasMany('Comment');
+        //$photos = $place->hasMany('Photo');
     
         
          //carga la vista y le pasa el libro
          $this->loadView('place/show', [
-             'place'=> $place,   
-             'photos'=> $photos,
-             'comment'=> $comments,
+             'comment'=> $comment,   
+          //   'photos'=> $photos,
          ]);
     }
     
@@ -72,51 +47,49 @@ class PlaceController extends Controller{
             redirect('/');
         }
         
-        $this->loadView('place/create', [
-            
+        $this->loadView('comment/create', [
+            'place'=> Place::findOrFail($idplace),
+            'photo'=> Photo::findOrFail($idphoto),
           
            ]);
     }
 
     
-    //guardar el anuncio
+    //guardar el comentario
     public function store(){
         
         Auth::oneRole(['ROLE_USER', 'ROLE_ADMIN']);
         //comprueba que la petición venga del formulario
         if (!$this->request->has('guardar'))
             throw new Exception('No se recibio el formulario');
-        $place = new Place();  //crea el nuevo anuncio
+        $comment = new Comment();  //crea el nuevo anuncio
         
-        $place->name                    =$this->request->post('name');
-        $place->type                    =$this->request->post('type');
-        $place->location                =$this->request->post('location');
-        $place->description             =$this->request->post('description');   
-        //$place->cover                      =$this->request->post('cover');
-        
-        $place->iduser=Login::user()->id;
+        $comment->text                    =$this->request->post('text');
+        $comment->created_at              =$this->request->post('created_at');
+       
+        $comment->iduser=Login::user()->id;
 
         try{
-            $place->save();  //guarda el anuncio
+            $comment->save();  //guarda el anuncio
             
          
-            if(Upload::arrive('cover')){//si llega el fichero de la portada...
-                $place->cover = Upload::save(
-                    'cover', //nombre del input
-                    '../public/'.AD_IMAGE_FOLDER, //ruta de la carpeta de destino
-                    true,     //generar nombre único
-                    1240000,   //tamaño máximo
-                    'image/*', //tipo mime
-                    'ad_'    //prefijo del nombre
-                 );
-                $place->update(); //añade la foto 
-            }
+           // if(Upload::arrive('cover')){//si llega el fichero de la portada...
+             //   $place->cover = Upload::save(
+               //     'cover', //nombre del input
+               //     '../public/'.AD_IMAGE_FOLDER, //ruta de la carpeta de destino
+               //     true,     //generar nombre único
+                //    1240000,   //tamaño máximo
+                //    'image/*', //tipo mime
+                //    'ad_'    //prefijo del nombre
+               //  );
+              //  $comment->update(); //añade la foto 
+        //}
             
             //flashea un mensaje en sesión (para que no se borre al redireccionar)
-            Session::success("Guardado del place $place->name correcto.");
-            redirect("/Place/show/$place->id");  //redirecciona a los detalles
+            Session::success("Guardado del comentario $comment->name correcto.");
+            redirect("/Place/show/$comment->idplace");  //redirecciona a los detalles
         }catch (SQLException $e){
-            Session::error("No se puede guardar el lugar $place->name");
+            Session::error("No se puede guardar el comentario");
             
             //si estamos en modo DEBUG, si que iremos a la pagina de error
             if(DEBUG)
@@ -125,7 +98,7 @@ class PlaceController extends Controller{
             //si no, volveremos al formulario de creación
             //pondremos los valores antiguos en el formulario con los helpers old()
             else 
-                redirect("/Place/create");
+                redirect("/Comment/create");
             //si se produce un error en la subida del fichero(sería después de guardar)    
         }catch(UploadException $e){
             Session::warning("El anuncio se guardo correctamente,
@@ -133,7 +106,7 @@ class PlaceController extends Controller{
              if(DEBUG)
                   throw new Exception($e->getMessage());
              else 
-                 redirect("/Place/edit/$place->id"); //redirecciona a la edición
+                 redirect("/Comment/edit/$comment->id"); //redirecciona a la edición
                  
         }
     }
@@ -141,23 +114,23 @@ class PlaceController extends Controller{
     
    
     
-        //muestra el formulario de edición del libro
+        //muestra el formulario de edición del comentario
          public function edit(int $id = 0){
              
              //Primero Auth, luego compruebo quien es y lo comparo con el que esta logeado Y LANZO EXCEPCION
              Auth::check();
             
-            $place = Place::findOrFail($id, "No se encontro el anuncio.");
+            $comment = Comment::findOrFail($id, "No se encontro el anuncio.");
             
-            if(Login::oneRole(['ROLE_USER']) && $place->iduser != Login::user()->id ){
+            if(Login::oneRole(['ROLE_USER']) && $comment->iduser != Login::user()->id ){
                 Session::error("No tienes los permisos necesarios para hacer esto.");
                 redirect('/');
             };
        
                 
             //carga la vista con el formulario de edición
-            $this->loadView('place/edit', [
-                'place'=>$place,
+            $this->loadView('comment/edit', [
+                'comment'=>$comment,
                
                 
             ]);
@@ -171,9 +144,9 @@ class PlaceController extends Controller{
                 throw new Exception('No se recibieron datos');
             
                 $id = intval($this->request->post('id')); //recuperar el id vía POST
-                $place = Place::find($id); //recupera el id desde la BDD
+                $comment = Comment::find($id); //recupera el id desde la BDD
                 
-                if (!$place) // si no hay anuncio con ese id
+                if (!$comment) // si no hay anuncio con ese id
                     throw new NotFoundException("No se ha encontrado el anuncio $id.");
                 //recuperar el resto de campos
                 $place->name                        =$this->request->post('name');

@@ -63,7 +63,7 @@ define('TEMPLATE', 'Template');
 define('AD_IMAGE_FOLDER', '/images/ad');
 
 //Carpeta para las fotos que se añaden a la de portada
-define('PI_IMAGE_FOLDER', 'images/pi');
+define('PI_IMAGE_FOLDER', '/images/picture');
 
 //Carpeta para user
 define('USER_IMAGE_FOLDER', '/images/user');

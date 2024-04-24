@@ -22,17 +22,14 @@
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
 		 <h1><?= APP_NAME ?></h1>
-		 <div class="derecha">
-		 	<a class="button" href="/Comment/create/<?=$place->id ?>">Nuevo comentario</a>
-		 	<a class="button" href="/Photo/create/<?= $place->id ?>">Nueva Foto</a>
-		 </div>
-		 <br>
 		 <div class="flex-container">
 		 
 		 <section class="flex1">
 		 <h2><?= "Detalles de los places $place->name" ?></h2>
 		 
-		 
+		 <div class="derecha">
+		 	<a class="button" href="/Photo/create/<?= $place->id ?>">New Photo</a>
+		 </div>
 		 <form method="post">
 		 <input type="hidden" name="idplace" value="$place->id">
 		 </form>
@@ -48,9 +45,7 @@
 		 		class="cover" alt="Foto de <?= $place->name ?>">
 		 		<figcaption>Foto de <?="$place->name, a un precio de $place->precio € " ?></figcaption>
 		 </figure>
-		 
-		 </div>
-		 <br>	
+		 </div>	
 		 
 		 					 
 		 <div class="centrado">
@@ -63,43 +58,25 @@
 		 <h2>Fotos de usuarios</h2>
 		
 		<?php foreach ($photos as $photo){?>
-		<div class="flex-container">
-		 		<section class="flex4">
-		 			
+		
+		 		
+		 			<div class="centrado">
 		 				<img src="<?= PI_IMAGE_FOLDER.'/'.($photo->file ?? DEFAULT_PICTURE_IMAGE) ?>"
 		 					class="cover" alt="Foto de <?= $photo->name ?>">
 		 			
 		 				<a class="button" href='/Photo/show/<?=$photo->id ?>'>Ver</a> -
 		 				<?php if (Login::user()->id == $place->iduser) {?>
-		 				<a class="button" href='/Photo/edit/<?=$photo->id ?>'>Actualizar</a> -
+		 				<a href='/Photo/edit/<?=$photo->id ?>'>Actualizar</a> -
 		 				<?php }?>
 		 				<?php if (Login::user()->id == $place->iduser) {?>
-		 				<a class="button" href='/Photo/delete/<?=$photo->id ?>'>Borrar</a>
+		 				<a href='/Photo/delete/<?=$photo->id ?>'>Borrar</a>
 		 				<?php }?> 		
-		 			
-		 		</section>	
-		 </div>		
+		 			</div>
+		 		
 		 		<?php }?>	
 		 		
-		 	<h2>Comentarios de usuarios</h2>	
-		 	
-		 <?php foreach ($comments as $comment){?>
-		<div class="flex-container">
-		 		<section class="flex4">
-		 			
-		 				
-		 			
-		 				<a class="button" href='/Comment/show/<?=$comment->id ?>'>Ver</a> -
-		 				<?php if (Login::user()->id == $comment->iduser) {?>
-		 				<a class="button" href='/Comment/edit/<?=$comment->id ?>'>Actualizar</a> -
-		 				<?php }?>
-		 				<?php if (Login::user()->id == $comment->iduser) {?>
-		 				<a class="button" href='/Comment/delete/<?=$comment->id ?>'>Borrar</a>
-		 				<?php }?> 		
-		 			
-		 		</section>	
-		 </div>				
-				<?php }?>
+		 	<h2>Comenatrios de usuarios</h2>		
+		
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 
 	</body>
