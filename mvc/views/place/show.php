@@ -26,8 +26,8 @@
 		 	
 		 	
 		 	
-		 	<a class="button" href="/Comment/create/<?=$place->id?>/<?=$photo->id?>">Nuevo comentario</a>
-		 	<?php var_dump($place, $photo)?>
+		 	<a class="button" href="/Place/createComment/<?=$place->id?>">Nuevo comentario</a>
+		 	
 		 	<a class="button" href="/Photo/create/<?= $place->id ?>">Nueva Foto</a>
 		 </div>
 		 <br>
@@ -90,23 +90,35 @@
 		 		
 		 	<h2>Comentarios de usuarios</h2>	
 		 	
-		 <?php foreach ($comments as $comment){?>
-		<div class="flex-container">
-		 		<section class="flex4">
-		 		<?php var_dump($comment)?>
-		 			
-		 				
-		 			
+		 <?php 
+		 if ($comments) {
+		      echo "<p>No hay comentarios de este lugar.</p>";
+		 }else{?>
+		 
+		
+		 			<table>
+		 				<tr>
+		 					<th>Comentario</th><th>usuario</th><th>operaciones</th>
+		 					</tr>
+		 					<?php foreach ($createComments as $comment){?>
+		 					
+		 					<tr>	
+		 					<td><?= $comment->text ?></td>
+		 					<td><?= $comment->iduser ?></td>
+		 					<td class="centrado">
 		 				<a class="button" href='/Comment/show/<?=$comment->id ?>'>Ver</a> -
 		 				<?php if (Login::user()->id == $comment->iduser) {?>
 		 				<a class="button" href='/Comment/edit/<?=$comment->id ?>'>Actualizar</a> -
 		 				<?php }?>
 		 				<?php if (Login::user()->id == $comment->iduser) {?>
 		 				<a class="button" href='/Comment/delete/<?=$comment->id ?>'>Borrar</a>
+		 				<?php }?>
+		 				</td>
+		 				</tr>
 		 				<?php }?> 		
+		 			</table>
+		 		
 		 			
-		 		</section>	
-		 </div>				
 				<?php }?>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

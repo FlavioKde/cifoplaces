@@ -1,9 +1,10 @@
+
 <?php ?>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>Create de photo - <?= APP_NAME?></title>
+		<title>Creación de comentarios  - <?= APP_NAME?></title>
 		
 		<!-- META -->
 		<meta name="viewport" content="width=device-widh, initial-scale=1.0">
@@ -20,11 +21,11 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Creación de photo') ?>
+		 <?=(TEMPLATE)::getHeader('Creación de comentarios') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getBreadCrumbs([
-		     "Photo"=>'/Photo/list',
-		     "New Photo"=>null
+		     "Comentario"=>'/Comentario/list',
+		     "Nuevo comentario"=>null
 		 ]) ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
@@ -34,41 +35,31 @@
 		 <section class="flex1">
 		 
 		 
-		 <h2>Nuevo photo</h2>
+		 <h2>Nuevo comentario</h2>
 		 
-		 <form method="post" action="/Photo/store" enctype="multipart/form-data">
+		 <form method="post" action="/Comment/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
-		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
-		 	<?php var_dump($place->id)?>
-		 	<label>Name</label>
-		 	<input type="text" name="name" value="<?= old('name') ?>">
-		 	<br>
-		 	<label>Description</label>
-		 	<input type="text" name="description" value="<?= old('description') ?>">
-		 	<br>
-		 	<label>Date</label>
-		 	<input type="date" name="date" value="<?= old('date') ?>">
-		 	<br>
-		 	<label>Time</label>
-		 	<input type="time" name="time" value="<?= old('time') ?>">
-		 	<br>
-		 	<label>Photo</label>
-		 	<input type="file" name="file" accept="image/*" id="file-with-preview">
-		 	<br>
+		 	<input type="hidden" name="idplace" value="<?= $place->id?>">
+		 	<input type="hidden" name="idphoto" value="<?= $photo->id ?>">
+		 
+		 	<label>Comentario:</label>
+		 	<textarea name="text"><?= old('text') ?></textarea>
+		 	<label>Fecha:</label>
+		 	<input type="date" name="created_at" value="<?= old('created_at') ?>">
+			<br>
 		 	<input type="submit" class="button" name="guardar" value="Guardar">		 
 		 </form>
 		 </section>
 		 <figure class= "flex1 centrado">
-		 	<img src="<?= PI_IMAGE_FOLDER.'/'.($photo->file ?? DEFAULT_PICTURE_IMAGE) ?>" id="preview-image"
-		 		class="cover" alt="Foto de <?= $photo->name ?>">
-		 		
+		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>" id="preview-image"
+		 		class="cover" alt="Foto de <?= $place->name ?>">
 		 	<figcaption>Previsualización de la imagen</figcaption>	
 		 </figure>	
 		 </div> 
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Lista de photo</a>		 	
+		 	<a class="button" href="/Place/list">Lista de Anuncios</a>		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

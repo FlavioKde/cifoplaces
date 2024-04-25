@@ -26,36 +26,19 @@ class CommentController extends Controller{
     //método que muestra los detalles de un comentario
     public function show(int $id = 0){
         
-        $comment = Comment::findOrFail($id, "No se encontro el comentario solicitado.");
+        $commentController = Comment::findOrFail($id, "No se encontro el comentario solicitado.");
         
-        //$photos = $comment->hasMany('Photo');
         
-        //$places = $comment->hasMany('Place');
     
         
-         //carga la vista y le pasa el libro
+         //carga la vista y le pasa el comentario
          $this->loadView('place/show', [
-             'comment'=> $comment,   
-            // 'photos'=> $photos,
-            // 'places'=> $places,
+             'commentController'=> $commentController,   
+            
          ]);
     }
     
-    //método que muestra el formulario del nuevo lugar
-    public function create($idplace , $idphoto){
-      
-       
-        if (!Login::oneRole(['ROLE_USER'])){
-            Session::error("No tienes los permisos necesarios para hacer esto.");
-            redirect('/');
-        }
-        
-        $this->loadView('comment/create', [
-            'place'=> Place::findOrFail($idplace),
-            'photo'=> Photo::findOrFail($idphoto),
-          
-           ]);
-    }
+   
 
     
     //guardar el comentario
@@ -65,7 +48,9 @@ class CommentController extends Controller{
         //comprueba que la petición venga del formulario
         if (!$this->request->has('guardar'))
             throw new Exception('No se recibio el formulario');
+        
         $comment = new Comment();  //crea el nuevo anuncio
+        
         $comment->idplace                 =$this->request->post('idplace');
         $comment->idphoto                 =$this->request->post('idphoto');
         $comment->text                    =$this->request->post('text');
@@ -80,21 +65,17 @@ class CommentController extends Controller{
             $comment->save();  //guarda el anuncio
             
          
-           // if(Upload::arrive('cover')){//si llega el fichero de la portada...
-             //   $place->cover = Upload::save(
-               //     'cover', //nombre del input
-               //     '../public/'.AD_IMAGE_FOLDER, //ruta de la carpeta de destino
-               //     true,     //generar nombre único
-                //    1240000,   //tamaño máximo
-                //    'image/*', //tipo mime
-                //    'ad_'    //prefijo del nombre
-               //  );
-              //  $comment->update(); //añade la foto 
-        //}
             
             //flashea un mensaje en sesión (para que no se borre al redireccionar)
             Session::success("Guardado del comentario correcto.");
+            
+            
+            if($comment->idplace){
             redirect("/Place/show/$comment->idplace");  //redirecciona a los detalles
+            }else{
+                redirect("/Photo/show/$comment->idphoto");
+            }
+        
         }catch (SQLException $e){
             Session::error("No se puede guardar el comentario");
             
@@ -210,23 +191,23 @@ class CommentController extends Controller{
         public function delete(int $id = 0){
             //comprueba que llega el identificador
             Auth::check();
-            $place = Place::find($id);
+            $comment = Comment::find($id);
             
-            if(Login::check() && !Login::isAdmin() && $place->iduser != Login::user()->id){
+            if(Login::check() && !Login::isAdmin() && $comment->iduser != Login::user()->id){
                 Session::error("No tienes los permisos necesarios para hacer esto.");
                 redirect('/');
             };
             
             if (!$id)
-                throw new Exception("No se indico el anuncio a borrar.");
+                throw new Exception("No se indico el comentario a borrar.");
             
          //recupera el anuncio con dicho identificador
         // $anuncio = Anuncio::find($id);
          
          //comprueba que el anuncio existe
-         if (!$place)
-             throw new NotFoundException("No existe el place $id.");
-         $this->loadView('place/delete', ['place'=>$place]);
+         if (!$comment)
+             throw new NotFoundException("No existe el comentario $id.");
+         $this->loadView('comment/delete', ['comment'=>$comment]);
         }
         //elimina el anuncio
         public function destroy(){
@@ -235,14 +216,14 @@ class CommentController extends Controller{
                 throw new FormException('No se recibio la confirmación');
             
            $id = intval($this->request->post('id')); //recupera el identificador
-           $place = Place::findOrFail($id); //recupera el libro
+           $comment = Comment::findOrFail($id); //recupera el libro
            
            //comprueba que el libro existe
-           if (!$place)
+           if (!$comment)
                throw new NotFoundException("No existe el anuncio $id.");
            
            try{
-               $place->deleteObject();
+               $comment->deleteObject();
                
                //elimino la foto
                if ($place->foto)

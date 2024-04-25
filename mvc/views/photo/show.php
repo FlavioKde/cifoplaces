@@ -10,7 +10,7 @@
 		<meta name="author" content="Robert Sallent">
 		
 		<!-- FAVICON -->
-		<link rel="shortcut icon" href="/favicon.ico" tyoe="image/png"> 
+		<link rel="shortcut icon" href="/favicon.ico" type="image/png"> 
 		
 		<!-- CSS -->
 		<?= (TEMPLATE)::getCss() ?>	
@@ -22,10 +22,14 @@
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
 		 <h1><?= APP_NAME ?></h1>
-		 <div class="flex-container">
 		 
+		 <div class="derecha">
+		 <a class="button" href="/Place/createPhotoComment/<?=$photo->id?>">Nuevo comentario</a>
+		 </div>
+		 <br>
+		 <div class="flex-container">
 		 <section class="flex1">
-		 <h2><?= "Detalles de los places $photo->name" ?></h2>
+		 <h2><?= "Detalles de los fotos de $photo->name" ?></h2>
 		 
 		 <p><b>Nombre:</b>                   <?=$photo->name?></p>
 		 <p><b>Descripción:</b>              <?=$photo->description?></p>
@@ -49,7 +53,38 @@
 		 	<a class="button" href="/Photo/delete<?= $photo->id ?>">Borrado</a>
 		 	<?php }?>
 		 </div>
-	
+		<h2>Comentarios de usuarios</h2>	
+		 	
+		 <?php 
+		 if ($comments) {
+		      echo "<p>No hay comentarios de este lugar.</p>";
+		 }else{?>
+		 
+		
+		 			<table>
+		 				<tr>
+		 					<th>Comentario</th><th>usuario</th><th>operaciones</th>
+		 					</tr>
+		 					<?php foreach ($createPhotoComments as $comment){?>
+		 					
+		 					<tr>	
+		 					<td><?= $comment->text ?></td>
+		 					<td><?= $comment->iduser ?></td>
+		 					<td class="centrado">
+		 				<a class="button" href='/Comment/show/<?=$comment->id ?>'>Ver</a> -
+		 				<?php if (Login::user()->id == $comment->iduser) {?>
+		 				<a class="button" href='/Comment/edit/<?=$comment->id ?>'>Actualizar</a> -
+		 				<?php }?>
+		 				<?php if (Login::user()->id == $comment->iduser) {?>
+		 				<a class="button" href='/Comment/delete/<?=$comment->id ?>'>Borrar</a>
+		 				<?php }?>
+		 				</td>
+		 				</tr>
+		 				<?php }?> 		
+		 			</table>
+		 		
+		 			
+				<?php }?>
 		
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

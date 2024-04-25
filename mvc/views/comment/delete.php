@@ -18,24 +18,24 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Lista de places') ?>
+		 <?=(TEMPLATE)::getHeader('Comentarios') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
 		 <h1><?= APP_NAME ?></h1>
-		 <h2>Borrar el place</h2>
+		 <h2>Borrar el comentario</h2>
 		 
-		 <form method="post" action="/Place/destroy">
-		 	<p>Confirmar el borrado del anuncio <b><?=$place->name ?></b>.</p>
+		 <form method="post" action="/Comment/destroy">
+		 	<p>Confirmar el borrado del comentario <b><?=$place->name ?></b>.</p>
 		 	
 		 	<!-- input oculto que contiene el ID del anuncio a borrar -->
-		 	<input type="hidden" name="id" value="<?= $place->id ?>">
+		 	<input type="hidden" name="id" value="<?= $comment->id ?>">
 		 	<input type="submit" class="button" name="borrar" value="Borrar">		 
 		 </form>	 
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de anuncios</a>
+		 	<a class="button" href="/Place/list">Lista de lugares</a>
 		 	<a class="button" href="/Place/show/<?= $place->id ?>">Detalles</a>
 		 	<a class="button" href="/Place/edit/<?= $place->id ?>">Edición</a>		 	
 		 </div>

@@ -40,6 +40,7 @@
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
 		 	<input type="hidden" name="idplace" value="<?= $place->id?>">
 		 	<input type="hidden" name="idphoto" value="<?= $photo->id ?>">
+		 	<?php var_dump($place->id, $photo->id)?>
 		 	<label>Comentario:</label>
 		 	<textarea name="text"><?= old('text') ?></textarea>
 		 	<label>Fecha:</label>

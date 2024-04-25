@@ -35,7 +35,7 @@
 		 <form method="post" action="/Place/update" class="flex1"
 		 		enctype="multipart/form-data">
 		 	<!-- input oculto que contiene el ID del anuncio a actualizar -->
-		 	<input type="hidden" name="id" value="<?= $place->id ?>">
+		 	<input type="hidden" name="id" value="<?= $comment->id ?>">
 		 	<label>Name:</label>
 		 	<input type="text" name="name" value="<?= $place->name ?>">
 		 	<br>

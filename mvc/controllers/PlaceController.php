@@ -52,14 +52,16 @@ class PlaceController extends Controller{
         $place = Place::findOrFail($id, "No se encontro el lugar solicitado.");
         
         $photos = $place->hasMany('Photo');
-        $comments = $place->hasMany('Comment');
-    
+        $createComments = $place->hasMany('Comment');
+      
+       // $createPhotoComments = $place->hasMany('Comment');
         
          //carga la vista y le pasa el libro
          $this->loadView('place/show', [
              'place'=> $place,   
              'photos'=> $photos,
-             'comments'=> $comments,
+             'createComments'=> $createComments,
+         //   'createPhotoComments'=>$createPhotoComments,
          ]);
     }
     
@@ -280,5 +282,44 @@ class PlaceController extends Controller{
                    redirect("/Place/delete/$id");
            }
         }
-       
+        //método que muestra el formulario del nuevo lugar
+        public function createComment(int $id = 0){
+            
+            
+            if (!Login::oneRole(['ROLE_USER'])){
+                Session::error("No tienes los permisos necesarios para hacer esto.");
+                redirect('/');
+            }
+            
+            $place= Place::findOrFail($id);
+           
+            
+            $this->loadView('place/createComment',[
+                    'place'=>$place,
+             
+                
+            ]);
+            
+          
+        }//método que muestra el formulario del nuevo lugar
+        public function createPhotoComment(int $id = 0){
+            
+            
+            if (!Login::oneRole(['ROLE_USER'])){
+                Session::error("No tienes los permisos necesarios para hacer esto.");
+                redirect('/');
+            }
+            
+            $photo= Photo::findOrFail($id);
+            
+            
+            $this->loadView('photo/createPhotoComment',[
+                'photo'=>$photo,
+                
+                
+            ]);
+            
+            
+        }
 }
+

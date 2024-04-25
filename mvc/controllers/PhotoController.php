@@ -51,12 +51,13 @@ class PhotoController extends Controller{
         
         $photo = Photo::findOrFail($id, "No se encontro el lugar solicitado.");
        
-        
+        $createPhotoComments = $photo->hasMany('Comment');
         
         
         //carga la vista y le pasa el libro
         $this->loadView('photo/show', [
             'photo'=> $photo,
+            'createPhotoComments'=>$createPhotoComments,
          
         ]);
     }
