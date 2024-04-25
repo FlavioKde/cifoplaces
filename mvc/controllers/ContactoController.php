@@ -24,7 +24,7 @@ class ContactoController extends Controller{
              $email->send();
              
              Session::success('Mensaje enviado, en breve recibirás una respuesta.');
-             redirect('/');
+             redirect('/Contacto');
                   
              }catch (EmailException $e){
              

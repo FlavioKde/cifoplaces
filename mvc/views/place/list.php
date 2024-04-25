@@ -29,11 +29,11 @@
 	</head>
 	<body>
 		 <?= (TEMPLATE)::getLogin() ?>
-		 <?= (TEMPLATE)::getHeader('Places') ?>
+		 <?= (TEMPLATE)::getHeader('Lugares') ?>
 		 <?= (TEMPLATE)::getMenu() ?>
 		 <?= (TEMPLATE)::getBreadCrumbs([
-		     "Places"=>'/Place/list',
-		     "List"=>null
+		     "Lugares"=>'/Place/list',
+		     "Lista"=>null
 		 ]) ?>
 		 <?= (TEMPLATE)::getFlashes() ?>
 	<main>
@@ -50,9 +50,9 @@
 		         //ruta a la que se enviá el formulario
 		         '/Place/list',
 		         //Lista de campos para "buscar en"
-		         ['Name'=>'name', 'Type'=>'type', 'Location'=>'location','Description'=>'description'],
+		         ['Nombre'=>'name', 'Tipo'=>'type', 'Lugar'=>'location','Descripción'=>'description'],
 		         //lista de campos para "ordenar por"
-		         ['Name'=>'name', 'Type'=>'type', 'Location'=>'location','Description'=>'description'],
+		         ['Nombre'=>'name', 'Tipo'=>'type', 'Lugar'=>'location','Descripción'=>'description'],
 		         //Valor por defecto para buscar "en"
 		         'Description',
 		         //Valor por defecto para ordenar "en"

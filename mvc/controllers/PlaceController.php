@@ -1,5 +1,5 @@
 <?php
-//controlador para las operaciones con libros
+//controlador para las operaciones con lugares
 //cada método implementará una operación o un paso de la misma
 class PlaceController extends Controller{
     
@@ -8,7 +8,7 @@ class PlaceController extends Controller{
         $this->list(); //redirige al método $list
     }
     
-    //operación para listar los anuncios
+    //operación para listar los lugares
     public function list(int $page = 1){
        
         
@@ -19,7 +19,7 @@ class PlaceController extends Controller{
         //datos para paginación
         $limit = RESULTS_PER_PAGE;  //resultados por paginas
         if ($filtro){
-            //recupera el total de los anuncios con los filtros aplicados
+            //recupera el total de lugares con los filtros aplicados
         $total = Place::filteredResults($filtro);    //total de resultados
         
         //crea un objeto paginator
@@ -32,7 +32,7 @@ class PlaceController extends Controller{
             $total=Place::total();
             //crea el objeto paginator
             $paginator=new Paginator('/Place/list', $page, $limit, $total);
-            //recupera todos los anuncio
+            //recupera todos los lugares
             $places = Place::orderBy('name', 'ASC', $limit, $paginator->getOffset());
         }
         //carga la vista
@@ -54,14 +54,14 @@ class PlaceController extends Controller{
         $photos = $place->hasMany('Photo');
         $createComments = $place->hasMany('Comment');
       
-       // $createPhotoComments = $place->hasMany('Comment');
+       
         
-         //carga la vista y le pasa el libro
+         //carga la vista y le pasa el lugar
          $this->loadView('place/show', [
              'place'=> $place,   
              'photos'=> $photos,
              'createComments'=> $createComments,
-         //   'createPhotoComments'=>$createPhotoComments,
+        
          ]);
     }
     

@@ -38,11 +38,18 @@
         			<input type="password" name="password" id="password" required>
     			</div>
     			
-    			<div class="centrado">
-    				<input type="submit" class="button" name="login" value="LogIn">
+    			
+    			<div class="centrado" >
+    				<input type="submit" class="button" name="login" value="LogIn">	
     			</div>
-    			<div class="derecha">
+    			
+    			<div class="flex-container">
+    			<div class="flex1">
     				<a href="/Forgotpassword">Olvidé mi clave</a>
+    			</div>
+    			<div class="flex1">
+    				<a href="/User/create">Registro</a>
+    			</div>
     			</div>
     			
     		</form>

@@ -3,7 +3,7 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>Detalles del anuncio en - <?= APP_NAME?></title>
+		<title>Home del usuario en - <?= APP_NAME?></title>
 		<!-- META -->
 		<meta name="viewport" content="width=device-widh, initial-scale=1.0">
 		<meta name="description" content="Home de usuario <?= APP_NAME ?> ">
@@ -44,17 +44,17 @@
 		 </figure>
 		 </div>
 		 <section>
-		 <h2>Anuncios de <?= $user->displayname ?></h2>
+		 <h2>Lugares de <?= $user->displayname ?></h2>
 		 
 		 <?php 
 		 
 		 if (!$places){
-		     echo "<p>No tiene anuncios propios este usuario.</p>";
+		     echo "<p>No tiene publicaciones propias este usuario.</p>";
 		 }else ?>
 		 
 		 <table>
 		 	<tr>
-		 		<th>Foto</th><th>Name</th><th>Type</th><th>Location</th><th>Description</th><th>Operaciones</th>
+		 		<th>Foto</th><th>Nombre</th><th>Tipo</th><th>Lugar</th><th>Descripción</th><th>Operaciones</th>
 		 	</tr>
 		 	<?php foreach ($places as $place){?>
 		 	
@@ -79,7 +79,7 @@
 		 </section>
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de places</a>
+		 	<a class="button" href="/Place/list">Lista de lugares</a>
 		 	
 		 </div>
 		 

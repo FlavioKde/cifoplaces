@@ -38,7 +38,7 @@ class Template implements TemplateInterface{
             return "
                <div class='derecha'>
                     <a class='button' href='/Login'>LogIn</a>
-                    <a class='button' href='/User/create'>Registration</a>
+                    <a class='button' href='/User/create'>Registro</a>
                </div>
             
         ";
@@ -109,9 +109,9 @@ class Template implements TemplateInterface{
     
         // entrada adicional de ejemplo:
         
-        $html .=   "<li><a href='/Place'>Places</a></li>";
-        $html .=   "<li><a href='/Place/create'>New Place</a></li>";  
-        $html .=   "<li><a href='/Contacto'>Contac</a></li>";
+        $html .=   "<li><a href='/Place'>Lugares</a></li>";
+        $html .=   "<li><a href='/Place/create'>Nuevo lugar</a></li>";  
+        $html .=   "<li><a href='/Contacto'>Contacto</a></li>";
         
         $html .= "</menu>";
 
