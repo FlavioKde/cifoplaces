@@ -76,8 +76,7 @@
 		 		</tr>
 		 		<?php }?>		
 		 </table>
-		 <?= $paginator->ellipsisLinks() ?>
-		 
+		  <?= $paginator->ellipsisLinks() ?> 
 		 	<div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
 		 	</div>

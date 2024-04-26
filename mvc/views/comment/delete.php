@@ -37,7 +37,7 @@
 		 	<a class="button" onclick="history.back()">Atrás</a>
 		 	<a class="button" href="/Place/list">Lista de lugares</a>
 		 	<a class="button" href="/Place/show/<?= $place->id ?>">Detalles</a>
-		 	<a class="button" href="/Place/edit/<?= $place->id ?>">Edición</a>		 	
+		 		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

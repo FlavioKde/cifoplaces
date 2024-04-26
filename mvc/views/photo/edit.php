@@ -32,10 +32,10 @@
 		 <section class="flex1">
 		 <h2>Edición de fotos <?= $photo->name ?></h2>
 		 
-		 <form method="post" action="/Place/update" class="flex1"
+		 <form method="post" action="/Photo/update" class="flex1"
 		 		enctype="multipart/form-data">
 		 	<!-- input oculto que contiene el ID del anuncio a actualizar -->
-		 	<input type="hidden" name="id" value="<?= $place->id ?>">
+		 	<input type="hidden" name="id" value="<?= $photo->id ?>">
 		 	<label>Nombre</label>
 		 	<input type="text" name="name" value="<?= $photo->name ?>">
 		 	<br>

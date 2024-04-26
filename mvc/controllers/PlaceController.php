@@ -69,7 +69,7 @@ class PlaceController extends Controller{
     public function create(){
       
        
-        if (!Login::oneRole(['ROLE_USER'])){
+        if (!Login::oneRole(['ROLE_USER','ROLE_MODE'])){
             Session::error("No tienes los permisos necesarios para hacer esto.");
             redirect('/');
         }
@@ -84,7 +84,7 @@ class PlaceController extends Controller{
     //guardar el anuncio
     public function store(){
         
-        Auth::oneRole(['ROLE_USER', 'ROLE_ADMIN']);
+        Auth::oneRole(['ROLE_USER', 'ROLE_MODE']);
         //comprueba que la petición venga del formulario
         if (!$this->request->has('guardar'))
             throw new Exception('No se recibio el formulario');
@@ -149,7 +149,7 @@ class PlaceController extends Controller{
              //Primero Auth, luego compruebo quien es y lo comparo con el que esta logeado Y LANZO EXCEPCION
              Auth::check();
             
-            $place = Place::findOrFail($id, "No se encontro el anuncio.");
+            $place = Place::findOrFail($id, "No se encontro el lugar.");
             
             if(Login::oneRole(['ROLE_USER']) && $place->iduser != Login::user()->id ){
                 Session::error("No tienes los permisos necesarios para hacer esto.");

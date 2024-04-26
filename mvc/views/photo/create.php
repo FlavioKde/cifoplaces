@@ -23,8 +23,8 @@
 		 <?=(TEMPLATE)::getHeader('Creación de photo') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getBreadCrumbs([
-		     "Photo"=>'/Photo/list',
-		     "New Photo"=>null
+		     "Foto"=>'/Photo/list',
+		     "Nueva foto"=>null
 		 ]) ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
@@ -39,7 +39,7 @@
 		 <form method="post" action="/Photo/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
 		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
-		 	<?php var_dump($place->id)?>
+		 	
 		 	<label>Name</label>
 		 	<input type="text" name="name" value="<?= old('name') ?>">
 		 	<br>
@@ -49,9 +49,7 @@
 		 	<label>Date</label>
 		 	<input type="date" name="date" value="<?= old('date') ?>">
 		 	<br>
-		 	<label>Time</label>
-		 	<input type="time" name="time" value="<?= old('time') ?>">
-		 	<br>
+		 	
 		 	<label>Photo</label>
 		 	<input type="file" name="file" accept="image/*" id="file-with-preview">
 		 	<br>
@@ -68,7 +66,7 @@
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Lista de photo</a>		 	
+		 	<a class="button" href="/Photo/list">Fotos</a>		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

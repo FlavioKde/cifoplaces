@@ -62,7 +62,7 @@
 		 <?php if ($places) {?>
 		 <div class="derecha">
 		 <?= $paginator->stats() ?>
-		 <?php }?>
+		 
 		 </div>
 		 <table>
 		 	<tr>
@@ -92,8 +92,12 @@
 		 		</tr>
 		 		<?php }?>		
 		 </table>
+		
 		 <?= $paginator->ellipsisLinks() ?>
-		 
+		
+		 <?php }else{ ?>
+		 <p>No hay interacciones con el lugar seleccionado.</p>
+		 <?php }?>
 		 	<div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
 		 	</div>

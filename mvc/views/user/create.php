@@ -67,11 +67,11 @@
 		 	<label>Password</label>
 		 	<input type="password" name="password" value="<?=old('password') ?>" required>
 		 	<br>
-		 	<label>Fecha de alta</label>
-		 	<input type="date" name="created_at" value="<?=old('created_at') ?>" required>
-		 	<br>
 		 	<label>Repetir</label>
 		 	<input type="password" name="repeatpassword" value="<?=old('repeatpassword') ?>" required>
+		 	<br>
+		 	<label>Fecha de alta</label>
+		 	<input type="date" name="created_at" value="<?=old('created_at') ?>" required>
 		 	<br>
 		 	<label>Imagen de perfil</label>
 		 	<input type="file" name="picture" accept="image/*" id="file-with-preview">

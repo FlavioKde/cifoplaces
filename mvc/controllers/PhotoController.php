@@ -8,38 +8,18 @@ class PhotoController extends Controller{
         $this->list(); //redirige al método $list
     }
     
-    //operación para listar los anuncios
-    public function list(int $page = 1){
-   // public function list( $idplace){
+    //operación para listar las photos
+   // public function list(int $page = 1){
+   public function list( $idplace){
+     
+    
         
-        $photos = Photo::where('idplace', $idPlace)->get();
-        //comprobar si hay filtros
-     //   $filtro = Filter::apply('photos');
-        
-        //datos para paginación
-      //  $limit = RESULTS_PER_PAGE;  //resultados por paginas
-       // if ($filtro){
-            //recupera el total de los anuncios con los filtros aplicados
-         //   $total = Photo::filteredResults($filtro);    //total de resultados
-            
-            //crea un objeto paginator
-          //  $paginator = new Paginator('/Photo/list', $page, $limit, $total, 'en');
-            
-            //recupera los resultados para la página actual(el offset lo calcula el paginator)
-         //   $photos = Photo::filter($filtro, $limit, $paginator->getOffset());
-            //si no hay anuncio
-       // }else{
-         //   $total=Photo::total();
-            //crea el objeto paginator
-           // $paginator=new Paginator('/Photo/list', $page, $limit, $total);
-            //recupera todos los anuncio
-        //    $photos = Place::orderBy('name', 'ASC', $limit, $paginator->getOffset());
-       // }
+        $photos = Photo::where('idplace', $idplace)->get();
+    
         //carga la vista
         $this->loadView('place/show', [
             'photos'=> $photos,
-           // 'paginator'=> $paginator, //pasamos el objeto Paginator a la vista
-           // 'filtro'=>$filtro
+           
             
         ]);
         
@@ -162,7 +142,7 @@ class PhotoController extends Controller{
         //Primero Auth, luego compruebo quien es y lo comparo con el que esta logeado Y LANZO EXCEPCION
         Auth::check();
         
-        $photo = Photo::findOrFail($id, "No se encontro el anuncio.");
+        $photo = Photo::findOrFail($id, "No se encontro la foto.");
         
         if(Login::oneRole(['ROLE_USER']) && $photo->iduser != Login::user()->id ){
             Session::error("No tienes los permisos necesarios para hacer esto.");
@@ -205,24 +185,24 @@ class PhotoController extends Controller{
                     //de esta forma nos aseguraremos que se ha actualizado el anuncio
                     //independientemente de si pudo procesar el fichero o no
                     $secondUpdate = false; //flag para saber si hay que actualizar de nuevo
-                    $oldCover = $place->foto;  //portada antigua
+                    $oldCover = $photo->file;  //portada antigua
                     
-                    if (Upload::arrive('cover')){ //si llega una nueva foto
-                        $photo->cover = Upload::save(
-                            'cover' , '../public/'.AD_IMAGE_FOLDER, true, 0, 'image/*', 'book_'
+                    if (Upload::arrive('file')){ //si llega una nueva foto
+                        $photo->file = Upload::save(
+                            'file' , '../public/'.AD_IMAGE_FOLDER, true, 0, 'image/*', 'book_'
                             );
                         $secondUpdate = true;
                     }
                     //si hay que eliminar portada, el libro tenía una anterior y no llega una nueva...
-                    if (isset($_POST['eliminarfoto']) && $oldCover && !Upload::arrive('cover')){
-                        $photo->cover = NULL;
+                    if (isset($_POST['eliminarfoto']) && $oldCover && !Upload::arrive('file')){
+                        $photo->file = NULL;
                         $secondUpdate = true;
                     }
                     if ($secondUpdate){
                         $photo->update(); //aplica los cambios en la BDD(actualiza la portada)
                         @unlink('../public/'.AD_IMAGE_FOLDER.'/' .$oldCover); //elimina la portada anterior
                     }
-                    Session::success("Actualización del anuncio $photo->name correcta.");
+                    Session::success("Actualización de la foto correcta.");
                     redirect("/Photo/edit/$id");
                     //si hay un error al hacer la consulta
                 }catch (SQLException $e){

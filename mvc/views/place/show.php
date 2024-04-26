@@ -107,9 +107,7 @@
 		 					<td><?= $comment->iduser ?></td>
 		 					<td class="centrado">
 		 				<a class="button" href='/Comment/show/<?=$comment->id ?>'>Ver</a> -
-		 				<?php if (Login::user()->id == $comment->iduser) {?>
-		 				<a class="button" href='/Comment/edit/<?=$comment->id ?>'>Actualizar</a> -
-		 				<?php }?>
+		 				
 		 				<?php if (Login::user()->id == $comment->iduser) {?>
 		 				<a class="button" href='/Comment/delete/<?=$comment->id ?>'>Borrar</a>
 		 				<?php }?>

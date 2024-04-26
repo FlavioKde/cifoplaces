@@ -108,7 +108,7 @@ class CommentController extends Controller{
              //Primero Auth, luego compruebo quien es y lo comparo con el que esta logeado Y LANZO EXCEPCION
              Auth::check();
             
-            $comment = Comment::findOrFail($id, "No se encontro el anuncio.");
+            $comment = Comment::findOrFail($id, "No se encontro el comentario.");
             
             if(Login::oneRole(['ROLE_USER']) && $comment->iduser != Login::user()->id ){
                 Session::error("No tienes los permisos necesarios para hacer esto.");
@@ -229,7 +229,7 @@ class CommentController extends Controller{
                if ($place->foto)
                    @unlink('../public/'.AD_IMAGE_FOLDER.'/'.$place->foto);
                
-               Session::success("Se ha borrado el anuncio $place->name.");
+               Session::success("Se ha borrado el comentario.");
                redirect("/Place/list");
                
            }catch(SQLException $e){

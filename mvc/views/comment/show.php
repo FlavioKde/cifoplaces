@@ -25,7 +25,7 @@
 		 <div class="flex-container">
 		 
 		 <section class="flex1">
-		 <h2><?= "Detalles de los places $place->name" ?></h2>
+		 <h2><?= "Detalles del comentario" ?></h2>
 		 
 		 <div class="derecha">
 		 	<a class="button" href="/Photo/create/<?= $place->id ?>">New Photo</a>
