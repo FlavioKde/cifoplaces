@@ -34,8 +34,9 @@
 		 
 		 <form method="post" action="/Photo/update" class="flex1"
 		 		enctype="multipart/form-data">
-		 	<!-- input oculto que contiene el ID del anuncio a actualizar -->
+		 	<!-- input oculto que contiene el ID de la foto a actualizar -->
 		 	<input type="hidden" name="id" value="<?= $photo->id ?>">
+		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
 		 	<label>Nombre</label>
 		 	<input type="text" name="name" value="<?= $photo->name ?>">
 		 	<br>
@@ -44,7 +45,8 @@
 		 	<br>
 		 	<label>Dia</label>
 		 	<input type="date" name="date" value="<?= $photo->date ?>">
-		 	<br><label>Hora</label>
+		 	<br>
+		 	<label>Hora</label>
 		 	<input type="time" name="time" value="<?= $photo->time ?>">
 		 	<br>
 		 	<label>Foto</label>
@@ -64,7 +66,9 @@
 		 </div>
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list/<?$photo->id ?>">Lista de lugares</a>
+		 	<?php if ($photo->id === $place->id) {?>
+		 	<a class="button" href="/Place/show/<?=$place->id ?>">Fotos de lugares</a>
+		 	<?php }?>
 		 	<?php if (Login::user()->id == $photo->id){?>
 		 	<a class="button" href="/Photo/show/<?= $photo->id ?>">Detalles</a>
 		 	<?php }?>

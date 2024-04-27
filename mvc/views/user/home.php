@@ -68,9 +68,9 @@
 		 			<td><?= $place->location?></td>
 		 			<td><?= $place->description?></td>
 		 			<td>
-		 				<a href='/Place/show/<?=$place->id ?>'>Ver</a> -
-		 				<a href='/Place/edit/<?=$place->id ?>'>Actualizar</a> -
-		 				<a href='/Place/delete/<?=$place->id ?>'>Borrar</a> -		
+		 				<a class="button" href='/Place/show/<?=$place->id ?>'>Ver</a> -
+		 				<a class="button" href='/Place/edit/<?=$place->id ?>'>Actualizar</a> -
+		 				<a class="button" href='/Place/delete/<?=$place->id ?>'>Borrar</a> -		
 		 			</td>
 		 		</tr>
 		 		<?php }?>		
@@ -79,7 +79,7 @@
 		 </section>
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de lugares</a>
+		 	<a class="button" href="/Place/list">Lugares</a>
 		 	
 		 </div>
 		 

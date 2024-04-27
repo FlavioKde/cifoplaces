@@ -10,11 +10,12 @@ class PhotoController extends Controller{
     
     //operación para listar las photos
    // public function list(int $page = 1){
-   public function list( $idplace){
-     
+   //public function list( $idplace){
+    public function list(int $id = 0){
     
+        $photos = Photo::getById($id);
         
-        $photos = Photo::where('idplace', $idplace)->get();
+    //    $photos = Photo::where('idplace', $idplace)->get();
     
         //carga la vista
         $this->loadView('place/show', [
@@ -42,7 +43,7 @@ class PhotoController extends Controller{
         ]);
     }
     
-    //método que muestra el formulario del nuevo anuncio
+    //método que muestra el formulario de creación de la nueva foto en un lugar
     public function create(int $idplace = 0){
         
        
@@ -136,7 +137,7 @@ class PhotoController extends Controller{
     
     
     
-    //muestra el formulario de edición del libro
+    //muestra el formulario de edición de la foto
     public function edit(int $id = 0){
         
         //Primero Auth, luego compruebo quien es y lo comparo con el que esta logeado Y LANZO EXCEPCION
@@ -160,16 +161,18 @@ class PhotoController extends Controller{
     }
     
     
-    //actualiza los datos del anuncio
-    public function update() {
+    //actualiza los datos de la foto
+    public function update(int $id= 0) {
         if(!$this->request->has('actualizar')) //si no llega el formulario...
             throw new Exception('No se recibieron datos');
             
             $id = intval($this->request->post('id')); //recuperar el id vía POST
             $photo = Photo::find($id); //recupera el id desde la BDD
+           
+            $photo->idplace            =$this->request->post('idplace');
             
-            if (!$photo) // si no hay anuncio con ese id
-                throw new NotFoundException("No se ha encontrado el anuncio $id.");
+            if (!$photo) // si no hay una foto con ese id
+                throw new NotFoundException("No se ha encontrado la foto $id.");
                 //recuperar el resto de campos
                 $photo->name               =$this->request->post('name');
                 $photo->date               =$this->request->post('date');
@@ -177,6 +180,9 @@ class PhotoController extends Controller{
                 $photo->description        =$this->request->post('description');
                 $photo->created_at         =$this->request->post('created_at');
                 $photo->updated_at         =$this->request->post('updated_at');
+               
+                //aca esta parte del problema
+               // $photo->idplace            =$this->request->post('idplace');
                 
                 try{
                     $photo->update();//actualiza los datos del anuncio
@@ -203,7 +209,7 @@ class PhotoController extends Controller{
                         @unlink('../public/'.AD_IMAGE_FOLDER.'/' .$oldCover); //elimina la portada anterior
                     }
                     Session::success("Actualización de la foto correcta.");
-                    redirect("/Photo/edit/$id");
+                    redirect("/Place/show/$photo->idplace");
                     //si hay un error al hacer la consulta
                 }catch (SQLException $e){
                     Session::error("No se pudo actualizar el anuncio $photo->name.");
@@ -237,12 +243,10 @@ class PhotoController extends Controller{
         if (!$id)
             throw new Exception("No se indico el anuncio a borrar.");
             
-            //recupera el anuncio con dicho identificador
-            // $anuncio = Anuncio::find($id);
             
-            //comprueba que el anuncio existe
+            //comprueba que la foto existe
             if (!$photo)
-                throw new NotFoundException("No existe el photo $id.");
+                throw new NotFoundException("No existe la foto $id.");
                 $this->loadView('photo/delete', ['photo'=>$photo]);
     }
     //elimina el anuncio
@@ -252,11 +256,11 @@ class PhotoController extends Controller{
             throw new FormException('No se recibio la confirmación');
             
             $id = intval($this->request->post('id')); //recupera el identificador
-            $photo = Photo::findOrFail($id); //recupera el libro
+            $photo = Photo::findOrFail($id); //recupera la foto
             
-            //comprueba que el libro existe
+            //comprueba que la foto existe
             if (!$photo)
-                throw new NotFoundException("No existe el anuncio $id.");
+                throw new NotFoundException("No existe la foto $id.");
                 
                 try{
                     $photo->deleteObject();
@@ -265,11 +269,11 @@ class PhotoController extends Controller{
                     if ($photo->foto)
                         @unlink('../public/'.AD_IMAGE_FOLDER.'/'.$photo->foto);
                         
-                        Session::success("Se ha borrado el anuncio $photo->name.");
-                        redirect("/Photo/list");
+                        Session::success("Se ha borrado la foto $photo->name.");
+                        redirect("/Place/show/$id->place");
                         
                 }catch(SQLException $e){
-                    Session::error("No se pudo borrar el libro $photo->name.");
+                    Session::error("No se pudo borrar la foto $photo->name.");
                     
                     if (DEBUG)
                         throw new Exception($e->getMessage());
