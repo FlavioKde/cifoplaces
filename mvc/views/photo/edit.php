@@ -35,8 +35,9 @@
 		 <form method="post" action="/Photo/update" class="flex1"
 		 		enctype="multipart/form-data">
 		 	<!-- input oculto que contiene el ID de la foto a actualizar -->
+		 	
 		 	<input type="hidden" name="id" value="<?= $photo->id ?>">
-		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
+		 	
 		 	<label>Nombre</label>
 		 	<input type="text" name="name" value="<?= $photo->name ?>">
 		 	<br>

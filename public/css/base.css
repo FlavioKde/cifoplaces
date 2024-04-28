@@ -251,6 +251,12 @@ body{
 	margin: 0px auto 20px auto;
 }
 
+/*main section*/
+/*section{
+	border: 2px solid blueviolet;
+	background-color: #67B7B1;
+}*/
+
 main{
 	padding: 2%;	
 	margin: 0px auto;
@@ -346,6 +352,7 @@ footer.second{
 	border-radius: 5px;
 	text-align: center;
 }
+
 
 
 /* Barra de navegación */
@@ -484,6 +491,7 @@ table{
 	border: solid 1px #40E0D0;
 	width: 100%;
 	margin: 5px auto;
+	border-radius: 10px;
 }
 
 table th{
@@ -492,6 +500,7 @@ table th{
 	padding: 10px;
 	font-size: 1.2rem;
 	text-align: left;
+	border-radius: 10px;
 }
 
 table tr:nth-of-type(odd){
@@ -504,6 +513,7 @@ table tr:nth-of-type(even){
 
 table tr, table td{
 	padding: 8px;
+	border-radius: 10px;
 }
 
 /* paginador*/

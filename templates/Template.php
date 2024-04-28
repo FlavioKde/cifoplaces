@@ -272,7 +272,7 @@ class Template implements TemplateInterface{
             <div class='flex1'>
         	<a href='/Contacto/'>Contacta con nosotros</a>
         	<br>
-        	<a href='/Registro/'>Registro, si queres</a>
+        	<a href='/User/create'>Registro, si queres</a>
         	<br>
         	<a href='/Place/'>Lugares, por si no pudiste ver algo</a>
         	<br>

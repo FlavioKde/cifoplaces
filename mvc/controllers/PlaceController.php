@@ -51,7 +51,9 @@ class PlaceController extends Controller{
         
         $place = Place::findOrFail($id, "No se encontro el lugar solicitado.");
         
-        $photos = $place->hasMany('Photo');
+       $photos = $place->hasMany('Photo');
+        //$photos = $place->photos;
+        //$photos = $place->belongsTo('Photo');
         $createComments = $place->hasMany('Comment');
       
        
@@ -280,7 +282,7 @@ class PlaceController extends Controller{
                    redirect("/Place/delete/$id");
            }
         }
-        //método que muestra el formulario del nuevo lugar
+        //método que muestra los nuevos comentarios
         public function createComment(int $id = 0){
             
             
@@ -299,7 +301,7 @@ class PlaceController extends Controller{
             ]);
             
           
-        }//método que muestra el formulario del nuevo lugar
+        }//método que muestra el formulario del nuevo comentario
         public function createPhotoComment(int $id = 0){
             
             

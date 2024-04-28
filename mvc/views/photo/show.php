@@ -46,7 +46,7 @@
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
 		 	
-		 	<a class="button" href="/Place/show/<?=$idplace->id ?>">Fotos</a>
+		 	<a class="button" href="/Place/show/<?=$photo->idplace ?>">Fotos</a>
 		 	
 		 	<?php if (Login::user()->id == $photo->id){?>
 		 	<a class="button" href="/Photo/edit/<?= $photo->id ?>">Edición</a>

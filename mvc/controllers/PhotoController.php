@@ -27,7 +27,7 @@ class PhotoController extends Controller{
         
     }
     
-    //método que muestra los detalles de un anuncio
+    //método que muestra los detalles de una foto
     public function show(int $id = 0){
         
         $photo = Photo::findOrFail($id, "No se encontro el lugar solicitado.");
@@ -72,7 +72,7 @@ class PhotoController extends Controller{
             throw new Exception('No se recibio el formulario');
             
             
-            $photo = new Photo();  //crea el nuevo anuncio
+            $photo = new Photo();  //crea la nueva foto
             
             
             $photo->name                     =$this->request->post('name');
@@ -162,14 +162,14 @@ class PhotoController extends Controller{
     
     
     //actualiza los datos de la foto
-    public function update(int $id= 0) {
+    public function update(int $id = 0) {
         if(!$this->request->has('actualizar')) //si no llega el formulario...
             throw new Exception('No se recibieron datos');
             
             $id = intval($this->request->post('id')); //recuperar el id vía POST
             $photo = Photo::find($id); //recupera el id desde la BDD
-           
-            $photo->idplace            =$this->request->post('idplace');
+            
+           // $photo->idplace            =$this->request->post('idplace');
             
             if (!$photo) // si no hay una foto con ese id
                 throw new NotFoundException("No se ha encontrado la foto $id.");
@@ -178,8 +178,8 @@ class PhotoController extends Controller{
                 $photo->date               =$this->request->post('date');
                 $photo->time               =$this->request->post('time');
                 $photo->description        =$this->request->post('description');
-                $photo->created_at         =$this->request->post('created_at');
-                $photo->updated_at         =$this->request->post('updated_at');
+               // $photo->created_at         =$this->request->post('created_at');
+               // $photo->updated_at         =$this->request->post('updated_at');
                
                 //aca esta parte del problema
                // $photo->idplace            =$this->request->post('idplace');
@@ -270,7 +270,7 @@ class PhotoController extends Controller{
                         @unlink('../public/'.AD_IMAGE_FOLDER.'/'.$photo->foto);
                         
                         Session::success("Se ha borrado la foto $photo->name.");
-                        redirect("/Place/show/$id->place");
+                        redirect("/Place/show/$photo->idplace");
                         
                 }catch(SQLException $e){
                     Session::error("No se pudo borrar la foto $photo->name.");

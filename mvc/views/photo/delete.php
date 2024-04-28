@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Lista de photo') ?>
+		 <?=(TEMPLATE)::getHeader('Fotos de lugares') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
