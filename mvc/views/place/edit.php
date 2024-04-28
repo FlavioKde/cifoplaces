@@ -21,7 +21,7 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Edit Place') ?>
+		 <?=(TEMPLATE)::getHeader('Edición de lugares') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
@@ -65,19 +65,14 @@
 		 </div>
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de anuncios</a>
+		 	<a class="button" href="/Place/list">Lugares</a>
 		 	<a class="button" href="/Place/show/<?= $place->id ?>">Detalles</a>
 		 	<a class="button" href="/Place/delete/<?= $place->id ?>">Borrado</a>		 	
 		 </div>
-		 <section>
+		
 		 
 		 
-		 <script>
-		 		function confirmar(id){
-		 			if(confirm('Seguro que deseas eliminar?'))
-		 				location.href = '/Ejemplar/destroy/'+id
-									}				 	
-		 </script>
+		 
 		 
 		 
 				

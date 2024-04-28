@@ -212,6 +212,11 @@ div.mensajeWarning>div{
 	background-color: #ffc;
 	border: solid 5px #660;
 }
+/*FUENTE*/
+@font-face {
+	font-family: 'cifoplaces';
+	src: url('../font/cifoplaces.ttf');
+}
 
 
 /* distintos elementos */
@@ -222,6 +227,7 @@ h1, h2, h3{
 
 h1 .small{
 	font-size: 1.25rem;
+	font-family: 'cifoplaces';
 }
 
 h2{
@@ -242,6 +248,10 @@ a:hover{
 }
 
 
+h1,h2{
+	font-family: cifoplaces;
+}
+
 /* estructura de la página */
 body{
 	color: rgb(100, 100, 100);
@@ -251,11 +261,6 @@ body{
 	margin: 0px auto 20px auto;
 }
 
-/*main section*/
-/*section{
-	border: 2px solid blueviolet;
-	background-color: #67B7B1;
-}*/
 
 main{
 	padding: 2%;	

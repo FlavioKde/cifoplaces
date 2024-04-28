@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		<?= (TEMPLATE)::getLogin() ?>
-		<?= (TEMPLATE)::getHeader('') ?>
+		<?= (TEMPLATE)::getHeader('Cifoplaces') ?>
 		<?= (TEMPLATE)::getMenu() ?>
 		<?= (TEMPLATE)::getFlashes() ?>
 		

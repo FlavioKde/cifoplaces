@@ -18,24 +18,31 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Lista de places') ?>
+		 <?=(TEMPLATE)::getHeader('Borrar lugar') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
 		 <h1><?= APP_NAME ?></h1>
-		 <h2>Borrar el place</h2>
+		 <h2>Borrar</h2>
+		 <script>
+		 		function confirmar(id){
+		 			if(confirm('Seguro que deseas eliminar?'))
+		 				location.href = '/Place/destroy/'+id
+									}				 	
+		 </script>
 		 
 		 <form method="post" action="/Place/destroy">
-		 	<p>Confirmar el borrado del anuncio <b><?=$place->name ?></b>.</p>
+		 	<p>Confirmar el borrado del lugar <b><?=$place->name ?></b>.</p>
 		 	
 		 	<!-- input oculto que contiene el ID del anuncio a borrar -->
 		 	<input type="hidden" name="id" value="<?= $place->id ?>">
-		 	<input type="submit" class="button" name="borrar" value="Borrar">		 
+		 		
+		 	<input type="submit" class="button" name="borrar" value="borrar" onclick="confirmar(<?= $place->id?>)">	 
 		 </form>	 
-		
+		 
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de anuncios</a>
+		 	<a class="button" href="/Place/list">Lugares</a>
 		 	<a class="button" href="/Place/show/<?= $place->id ?>">Detalles</a>
 		 	<a class="button" href="/Place/edit/<?= $place->id ?>">Edición</a>		 	
 		 </div>

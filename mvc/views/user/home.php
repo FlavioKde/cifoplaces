@@ -80,6 +80,7 @@
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
 		 	<a class="button" href="/Place/list">Lugares</a>
+		 	<a class="button" href="/User/edit/<?=$user->id ?>">Edición</a>
 		 	
 		 </div>
 		 

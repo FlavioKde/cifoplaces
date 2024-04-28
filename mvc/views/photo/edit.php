@@ -50,12 +50,7 @@
 		 	<label>Hora</label>
 		 	<input type="time" name="time" value="<?= $photo->time ?>">
 		 	<br>
-		 	<label>Foto</label>
-		 	<input type="file" name="file" accept="image/*" id="file-with-preview">
-		 	<br>
-		 	<input type="checkbox" name="eliminarfoto">
-		 	<label>Eliminar foto</label>
-		 	<br>
+		 	
 		 	<input type="submit" class="button" name="actualizar" value="Actualizar">		 
 		 </form>
 		 </section>

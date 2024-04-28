@@ -84,12 +84,15 @@ class Template implements TemplateInterface{
                     </a>
                 </figure>
                 <hgroup>
-            	   <h1>$titulo <span class='small italic'>en ".APP_NAME."</small></h1>
+                    <h1>$titulo <style='font-family: cifoplaces' ".APP_NAME.">
+                    </h1>
+            	 <h1>$titulo <span class='small italic'>en ".APP_NAME."</small></h1>
                    <p>".($subtitulo ?? '')."</p>
                 </hgroup>  
             </header>
         ";}
     
+        
         
     /*****************************************************************************
      * MENÚ
