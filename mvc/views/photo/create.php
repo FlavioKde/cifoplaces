@@ -66,7 +66,7 @@
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Fotos</a>		 	
+		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

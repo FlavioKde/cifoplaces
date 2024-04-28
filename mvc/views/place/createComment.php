@@ -58,7 +58,7 @@
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/show/<?= $createComment->idplace?>">Detalles</a>		 	
+		 		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 
