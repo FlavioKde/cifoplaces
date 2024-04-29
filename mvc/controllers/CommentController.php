@@ -11,8 +11,7 @@ class CommentController extends Controller{
     public function list( $idplace,){
         
         $comments = Comment::where('idplace', $idplace)->get();
-       // $comments = Comment::where('idphoto', $idphoto)->get();
-        
+      
         //carga la vista
         $this->loadView('place/show', [
             'comments'=> $comments,
