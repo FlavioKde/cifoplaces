@@ -52,6 +52,7 @@ class PlaceController extends Controller{
         $place = Place::findOrFail($id, "No se encontro el lugar solicitado.");
         
         $photos = $place->hasMany('Photo');
+       
         $createComments = $place->hasMany('Comment');
       
        
@@ -81,7 +82,7 @@ class PlaceController extends Controller{
     }
 
     
-    //guardar el anuncio
+    //guardar el nuevo lugar
     public function store(){
         
         Auth::oneRole(['ROLE_USER', 'ROLE_MODE']);
@@ -99,7 +100,7 @@ class PlaceController extends Controller{
         $place->iduser=Login::user()->id;
 
         try{
-            $place->save();  //guarda el anuncio
+            $place->save();  //guarda el lugar
             
          
             if(Upload::arrive('cover')){//si llega el fichero de la portada...
@@ -143,7 +144,7 @@ class PlaceController extends Controller{
     
    
     
-        //muestra el formulario de edición del libro
+        //muestra el formulario de edición del lugar
          public function edit(int $id = 0){
              
              //Primero Auth, luego compruebo quien es y lo comparo con el que esta logeado Y LANZO EXCEPCION
@@ -167,7 +168,7 @@ class PlaceController extends Controller{
       }
 
         
-        //actualiza los datos del anuncio
+        //actualiza los datos del lugar
         public function update() {
             if(!$this->request->has('actualizar')) //si no llega el formulario...
                 throw new Exception('No se recibieron datos');
@@ -175,7 +176,7 @@ class PlaceController extends Controller{
                 $id = intval($this->request->post('id')); //recuperar el id vía POST
                 $place = Place::find($id); //recupera el id desde la BDD
                 
-                if (!$place) // si no hay anuncio con ese id
+                if (!$place) // si no hay lugar con ese id
                     throw new NotFoundException("No se ha encontrado el anuncio $id.");
                 //recuperar el resto de campos
                 $place->name                        =$this->request->post('name');
@@ -187,7 +188,7 @@ class PlaceController extends Controller{
                     $place->update();//actualiza los datos del anuncio
                     
                     //si hay que hacer cambios en la portada lo haremos con un segundo update()
-                    //de esta forma nos aseguraremos que se ha actualizado el anuncio
+                    //de esta forma nos aseguraremos que se ha actualizado el lugar
                     //independientemente de si pudo procesar el fichero o no
                     $secondUpdate = false; //flag para saber si hay que actualizar de nuevo
                     $oldCover = $place->cover;  //portada antigua
@@ -198,26 +199,26 @@ class PlaceController extends Controller{
                             );
                         $secondUpdate = true;
                     }
-                    //si hay que eliminar portada, el libro tenía una anterior y no llega una nueva...
+                    //si hay que eliminar foto, el lugar tenía una anterior y no llega una nueva...
                     if (isset($_POST['eliminarcover']) && $oldCover && !Upload::arrive('cover')){
                         $place->cover = NULL;
                         $secondUpdate = true;
                     }
                     if ($secondUpdate){
                         $place->update(); //aplica los cambios en la BDD(actualiza la portada)
-                        @unlink('../public/'.AD_IMAGE_FOLDER.'/' .$oldCover); //elimina la portada anterior
+                        @unlink('../public/'.AD_IMAGE_FOLDER.'/' .$oldCover); //elimina la foto anterior
                     }
-                    Session::success("Actualización del anuncio $place->titulo correcta.");
+                    Session::success("Actualización del lugar $place->titulo correcta.");
                     redirect("/Place/edit/$id");
                     //si hay un error al hacer la consulta
                 }catch (SQLException $e){
-                    Session::error("No se pudo actualizar el anuncio $place->titulo.");
+                    Session::error("No se pudo actualizar el lugar $place->titulo.");
                     
                     if (DEBUG)
                            throw new Exception($e->getMessage());//redirecciona los detalles
                     //si hay error al subir el nuevo fichero
                 }catch(UploadException $e){
-                 Session::warning("El anuncio se actualizo correctamente,
+                 Session::warning("El lugar se actualizo correctamente,
                                   pero no se pudo subir el nuevo fichero de imagen.");
                  if (DEBUG)
                      throw new Exception($e->getMessage());
@@ -240,17 +241,15 @@ class PlaceController extends Controller{
             };
             
             if (!$id)
-                throw new Exception("No se indico el anuncio a borrar.");
+                throw new Exception("No se indico el lugar a borrar.");
             
-         //recupera el anuncio con dicho identificador
-        // $anuncio = Anuncio::find($id);
          
-         //comprueba que el anuncio existe
+         //comprueba que el lugar existe
          if (!$place)
-             throw new NotFoundException("No existe el place $id.");
+             throw new NotFoundException("No existe el lugar $id.");
          $this->loadView('place/delete', ['place'=>$place]);
         }
-        //elimina el anuncio
+        //elimina el lugar
         public function destroy(){
             //comprueba que llega el formulario de confirmación
             if (!$this->request->has('borrar'))
@@ -259,9 +258,9 @@ class PlaceController extends Controller{
            $id = intval($this->request->post('id')); //recupera el identificador
            $place = Place::findOrFail($id); //recupera el libro
            
-           //comprueba que el libro existe
+           //comprueba que el lugar existe
            if (!$place)
-               throw new NotFoundException("No existe el anuncio $id.");
+               throw new NotFoundException("No existe el lugar $id.");
            
            try{
                $place->deleteObject();
@@ -270,11 +269,11 @@ class PlaceController extends Controller{
                if ($place->foto)
                    @unlink('../public/'.AD_IMAGE_FOLDER.'/'.$place->foto);
                
-               Session::success("Se ha borrado el anuncio $place->name.");
+               Session::success("Se ha borrado el lugar $place->name.");
                redirect("/Place/list");
                
            }catch(SQLException $e){
-               Session::error("No se pudo borrar el libro $place->name.");
+               Session::error("No se pudo borrar el lugar $place->name.");
                
                if (DEBUG)
                    throw new Exception($e->getMessage());
@@ -282,7 +281,7 @@ class PlaceController extends Controller{
                    redirect("/Place/delete/$id");
            }
         }
-        //método que muestra el formulario del nuevo lugar
+        //método que muestra los nuevos comentarios
         public function createComment(int $id = 0){
             
             
@@ -301,7 +300,7 @@ class PlaceController extends Controller{
             ]);
             
           
-        }//método que muestra el formulario del nuevo lugar
+        }//método que muestra el formulario del nuevo comentario
         public function createPhotoComment(int $id = 0){
             
             

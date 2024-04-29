@@ -20,7 +20,7 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Creación de photo') ?>
+		 <?=(TEMPLATE)::getHeader('Nueva foto') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getBreadCrumbs([
 		     "Foto"=>'/Photo/list',
@@ -34,23 +34,23 @@
 		 <section class="flex1">
 		 
 		 
-		 <h2>Nuevo photo</h2>
+		 <h2>Nuevo foto</h2>
 		 
 		 <form method="post" action="/Photo/store" enctype="multipart/form-data">
 		 	<input type="hidden" name="iduser" value="<?= Login::user()->id ?>">
 		 	<input type="hidden" name="idplace" value="<?= $place->id ?>">
 		 	
-		 	<label>Name</label>
+		 	<label>Nombre</label>
 		 	<input type="text" name="name" value="<?= old('name') ?>">
 		 	<br>
-		 	<label>Description</label>
+		 	<label>Descripción</label>
 		 	<input type="text" name="description" value="<?= old('description') ?>">
 		 	<br>
-		 	<label>Date</label>
+		 	<label>Fecha</label>
 		 	<input type="date" name="date" value="<?= old('date') ?>">
 		 	<br>
 		 	
-		 	<label>Photo</label>
+		 	<label>Foto</label>
 		 	<input type="file" name="file" accept="image/*" id="file-with-preview">
 		 	<br>
 		 	<input type="submit" class="button" name="guardar" value="Guardar">		 
@@ -66,7 +66,7 @@
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Fotos</a>		 	
+		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

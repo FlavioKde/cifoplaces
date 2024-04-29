@@ -18,24 +18,24 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Lista de photo') ?>
+		 <?=(TEMPLATE)::getHeader('Fotos de lugares') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
 		 <h1><?= APP_NAME ?></h1>
-		 <h2>Borrar photo</h2>
+		 <h2>Borrar foto</h2>
 		 
 		 <form method="post" action="/Photo/destroy">
-		 	<p>Confirmar el borrado del anuncio <b><?=$photo->name ?></b>.</p>
+		 	<p>Confirmar el borrado de la foto <b><?=$photo->name ?></b>.</p>
 		 	
-		 	<!-- input oculto que contiene el ID del anuncio a borrar -->
+		 	<!-- input oculto que contiene el ID de la foto a borrar -->
 		 	<input type="hidden" name="id" value="<?= $photo->id ?>">
 		 	<input type="submit" class="button" name="borrar" value="Borrar">		 
 		 </form>	 
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Lista de anuncios</a>
+		 	<a class="button" href="/Place/list">Lugares</a>
 		 	<a class="button" href="/Photo/show/<?= $photo->id ?>">Detalles</a>
 		 	<a class="button" href="/Photo/edit/<?= $photo->id ?>">Edición</a>		 	
 		 </div>

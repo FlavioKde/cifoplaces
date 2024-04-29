@@ -44,6 +44,7 @@
 		 
 		 	<label>Comentario:</label>
 		 	<textarea name="text"><?= old('text') ?></textarea>
+		 	<br>
 		 	<label>Fecha:</label>
 		 	<input type="date" name="created_at" value="<?= old('created_at') ?>">
 			<br>
@@ -53,13 +54,13 @@
 		 <figure class= "flex1 centrado">
 		 	<img src="<?= AD_IMAGE_FOLDER.'/'.($place->cover ?? DEFAULT_AD_IMAGE) ?>" id="preview-image"
 		 		class="cover" alt="Foto de <?= $place->name ?>">
-		 	<figcaption>Previsualización de la imagen</figcaption>	
+		 		
 		 </figure>	
 		 </div> 
 		
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de Anuncios</a>		 	
+		 	<a class="button" href="/Place/list">Fotos</a>		 	
 		 </div>
 		 <?= (TEMPLATE)::getFooter() ?>
 	</main>	 

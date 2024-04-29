@@ -212,6 +212,11 @@ div.mensajeWarning>div{
 	background-color: #ffc;
 	border: solid 5px #660;
 }
+/*FUENTE*/
+@font-face {
+	font-family: 'cifoplaces';
+	src: url('../font/cifoplaces.ttf');
+}
 
 
 /* distintos elementos */
@@ -222,6 +227,7 @@ h1, h2, h3{
 
 h1 .small{
 	font-size: 1.25rem;
+	font-family: 'cifoplaces';
 }
 
 h2{
@@ -242,6 +248,10 @@ a:hover{
 }
 
 
+h1,h2{
+	font-family: cifoplaces;
+}
+
 /* estructura de la página */
 body{
 	color: rgb(100, 100, 100);
@@ -250,6 +260,7 @@ body{
 	width: 100%;	
 	margin: 0px auto 20px auto;
 }
+
 
 main{
 	padding: 2%;	
@@ -331,7 +342,10 @@ footer.primary img{
 }
 
 footer.primary{
-	border-top: solid 2px lightgrey;
+	border-top: solid 2px turquoise;
+}
+footer.second{
+	border-bottom: solid 2px turquoise;
 }
 
 /* formulario de login */
@@ -345,10 +359,11 @@ footer.primary{
 }
 
 
+
 /* Barra de navegación */
 menu{
 	padding: 8px 20px;
-	background-color: rgb(60, 100, 160);
+	background-color: #40E0D0;
 	color: white;
 	border-radius: 5px;
 }
@@ -437,7 +452,7 @@ textarea{
 	padding: 8px 20px;
 	margin: 4px;
 	border-radius: 3px;
-	background-color: rgb(60, 100, 160);
+	background-color: #EE82EE;
 	white-space: nowrap;
 	display: inline-block;
 	cursor: pointer;
@@ -449,7 +464,7 @@ textarea{
 }
 
 .button:hover{
-	background-color: rgb(100, 140, 200);
+	background-color: #40E0D0;
 }
 
 .buttonLight{
@@ -463,7 +478,7 @@ textarea{
 }
 
 .buttonLight:hover{
-	background-color: rgb(100, 140, 200);
+	background-color: #40E0D0;
 }
 
 /* paginador */
@@ -478,17 +493,19 @@ textarea{
 
 /* tablas */
 table{
-	border: solid 1px rgb(60, 100, 160);
+	border: solid 1px #40E0D0;
 	width: 100%;
 	margin: 5px auto;
+	border-radius: 10px;
 }
 
 table th{
 	color: white;
-	background-color: rgb(60, 100, 160);
+	background-color: #40E0D0;
 	padding: 10px;
 	font-size: 1.2rem;
 	text-align: left;
+	border-radius: 10px;
 }
 
 table tr:nth-of-type(odd){
@@ -501,6 +518,7 @@ table tr:nth-of-type(even){
 
 table tr, table td{
 	padding: 8px;
+	border-radius: 10px;
 }
 
 /* paginador*/
@@ -538,3 +556,9 @@ ul.listado li, ol.listado li{
 	min-height: 360px;
 }
 
+/*wELCOME PROPIO*/
+
+.float-right-welcome{
+	float:right;
+	margin-right:30%;
+	}

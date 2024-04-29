@@ -17,7 +17,7 @@
 	</head>
 	<body>
 		 <?=(TEMPLATE)::getLogin() ?>
-		 <?=(TEMPLATE)::getHeader('Detalles de los photo') ?>
+		 <?=(TEMPLATE)::getHeader('Detalles de fotos') ?>
 		 <?=(TEMPLATE)::getMenu() ?>
 		 <?=(TEMPLATE)::getFlashes() ?>
 	<main>
@@ -29,7 +29,7 @@
 		 <br>
 		 <div class="flex-container">
 		 <section class="flex1">
-		 <h2><?= "Detalles de los fotos de $photo->name" ?></h2>
+		 <h2><?= "Detalles fotos de $photo->name" ?></h2>
 		 
 		 <p><b>Nombre:</b>                   <?=$photo->name?></p>
 		 <p><b>Descripción:</b>              <?=$photo->description?></p>
@@ -45,7 +45,9 @@
 		 </div>			 
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Photo/list">Lista de fotos</a>
+		 	
+		 	<a class="button" href="/Place/show/<?=$photo->idplace ?>">Fotos</a>
+		 	
 		 	<?php if (Login::user()->id == $photo->id){?>
 		 	<a class="button" href="/Photo/edit/<?= $photo->id ?>">Edición</a>
 		 	<?php }?>
@@ -54,24 +56,23 @@
 		 	<?php }?>
 		 </div>
 		<h2>Comentarios de usuarios</h2>	
-		 	
-		 <?php 
-		 if ($comments) {
-		      echo "<p>No hay comentarios de este lugar.</p>";
-		 }else{?>
 		 
-		
+		 <div class="centrado">	
+		 <?php 
+		 if ($comment) {
+		      echo "<p>No hay comentarios de esta foto.</p>";
+		 }else{?>
+		 </div>
+			
 		 			<table>
-		 				<tr>
-		 					<th>Comentario</th><th>usuario</th><th>operaciones</th>
-		 					</tr>
+		 				
 		 					<?php foreach ($createPhotoComments as $comment){?>
 		 					
 		 					<tr>	
 		 					<td><?= $comment->text ?></td>
 		 					<td><?= $comment->iduser ?></td>
 		 					<td class="centrado">
-		 				<a class="button" href='/Comment/show/<?=$comment->id ?>'>Ver</a> -
+		 				
 		 				
 		 				<?php if (Login::user()->id == $comment->iduser) {?>
 		 				<a class="button" href='/Comment/delete/<?=$comment->id ?>'>Borrar</a>

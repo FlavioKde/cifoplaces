@@ -57,7 +57,7 @@
 		 					 
 		 <div class="centrado">
 		 	<a class="button" onclick="history.back()">Atrás</a>
-		 	<a class="button" href="/Place/list">Lista de lugares</a>
+		 	<a class="button" href="/Place/list">Lugares</a>
 		 	<?php if(Login::user()->id == $place->id){?>
 		 	<a class="button" href="/Place/edit/<?= $place->id ?>">Edición</a>
 		 	<?php }?>
@@ -91,22 +91,20 @@
 		 	<h2>Comentarios de usuarios</h2>	
 		 	
 		 <?php 
-		 if ($comments) {
+		 if ($comment) {
 		      echo "<p>No hay comentarios de este lugar.</p>";
 		 }else{?>
 		 
 		
 		 			<table>
-		 				<tr>
-		 					<th>Comentario</th><th>usuario</th><th>operaciones</th>
-		 					</tr>
+		 				
 		 					<?php foreach ($createComments as $comment){?>
 		 					
 		 					<tr>	
 		 					<td><?= $comment->text ?></td>
 		 					<td><?= $comment->iduser ?></td>
 		 					<td class="centrado">
-		 				<a class="button" href='/Comment/show/<?=$comment->id ?>'>Ver</a> -
+		 				
 		 				
 		 				<?php if (Login::user()->id == $comment->iduser) {?>
 		 				<a class="button" href='/Comment/delete/<?=$comment->id ?>'>Borrar</a>

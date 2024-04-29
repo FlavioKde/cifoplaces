@@ -80,16 +80,18 @@ class Template implements TemplateInterface{
             <header class='primary'>
                 <figure>
                     <a href='/'>
-                        <img style='width:100%;' alt='FastLight Logo' src='/images/template/fastlight.png'>
+                        <img style='width:100%;' alt='FastLight Logo' src='/images/template/logo2.png'>
                     </a>
                 </figure>
                 <hgroup>
-            	   <h1>$titulo <span class='small italic'>en ".APP_NAME."</small></h1>
+                    
+            	 <h1>$titulo <span class='small italic'>en ".APP_NAME."</small></h1>
                    <p>".($subtitulo ?? '')."</p>
                 </hgroup>  
             </header>
         ";}
     
+        
         
     /*****************************************************************************
      * MENÚ
@@ -253,21 +255,40 @@ class Template implements TemplateInterface{
     // retorna el footer
     public static function getFooter(){
         return "
-        <footer class='primary'>
+        <footer class='flex-container primary'>
+                   
+        	<div class='flex1'>
             
-            <p>Desarrollado por <a href='https://robertsallent.com'>
-                Robert Sallent</a> para sus cursos de desarrollo de aplicaciones web (2023).
+        	<a href='https://www.linkedin.com'><img src='/images/template/linkedin.png' alt='linkedin'></a>
+ 
+        	<a href='https://www.whassap.com'><img src='/images/template/wassap.png' alt='whassap'></a>
+	
+        	<a href='https://www.tiktok.com'><img src='/images/template/tiktok.jpg' alt='tiktok'></a>
 
-                <a href='https://robertsallent.com'>
-                    <img src='/images/template/logo.png' alt='Robert Sallent'>
-                </a>
-                <a href='https://www.linkedin.com/in/robert-sallent-l%C3%B3pez-4187a866'>
-                    <img src='/images/template/linkedin.png' alt='LinkedIn'>
-                </a>
-                <a href='https://github.com/robertsallent/fastlight'>
+            <a href='https://github.com/robertsallent/fastlight'>
                     <img src='/images/template/github.png' alt='GitHub'>
                 </a>
-            </p>
+        	
+            </div>
+        	
+            <div class='flex1'>
+        	<a href='/Contacto/'>Contacta con nosotros</a>
+        	<br>
+        	<a href='/User/create'>Registro, si queres</a>
+        	<br>
+        	<a href='/Place/'>Lugares, por si no pudiste ver algo</a>
+        	<br>
+        	<a href='/Place/create'>Nuevos lugares, comienza creando</a>
+        	</div>
+        	<div class='flex1'>
+        	
+        	<a href='/'><img src='images/template/logo2.png' alt='index'></a>
+        	
+        	</div>
+         
+            <div class='second'>
+            <p> </p>
+            </div>
         </footer>";
     }       
 }
